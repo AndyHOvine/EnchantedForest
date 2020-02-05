@@ -1,0 +1,295 @@
+program EnchantedForest;
+/*
+
+	Original game created by Fabrizio Caruso as a 10 liner BASIC program.
+	https://github.com/Fabrizio-Caruso/CBM-BASIC-10-liners/tree/master/Vic20/EnchantedForest
+
+	This version created by Andy Hewitt - Hewco.uk	
+*/
+var  
+
+@define DEBUG		1
+
+	// I need to save some bytes, I don't use these
+	@ignoremethod "init16x8mul"
+	@ignoremethod "init16x8div"
+	@ignoremethod "init8x8div"
+	@ignoremethod "initeightbitmul"
+	@ignoremethod "initjoystick"
+	@ignoremethod "initmoveto"
+	
+	// pre-shift sprite address offests for 8x8 sprites
+	const sprHeight:byte = 8;
+	// side a (left)					side b (middle)	
+	const m0a:byte = $0;				const m0b:byte = sprHeight;
+	const m1a:byte = m0a+(sprHeight*2);	const m1b:byte = m0b+(sprHeight*2);
+	const m2a:byte = m1a+(sprHeight*2);	const m2b:byte = m1b+(sprHeight*2);
+	const m3a:byte = m2a+(sprHeight*2);	const m3b:byte = m2b+(sprHeight*2);	
+	const m4a:byte = m3a+(sprHeight*2);	const m4b:byte = m3b+(sprHeight*2);	
+	const m5a:byte = m4a+(sprHeight*2);	const m5b:byte = m4b+(sprHeight*2);	
+	const m6a:byte = m5a+(sprHeight*2);	const m6b:byte = m5b+(sprHeight*2);	
+	const m7a:byte = m6a+(sprHeight*2);	const m7b:byte = m6b+(sprHeight*2);	
+	
+
+// Address of bitmap (screen and characters)
+@userdata $1000 $1FFF "Bitmap"
+
+
+
+
+// -------------------------------------------------------------------------------
+// Parameters
+
+
+
+// -------------------------------------------------------------------------------
+// Resource memory
+
+
+
+// -------------------------------------------------------------------------------
+// Include Resources
+@vbmexport "spr/sprites.flf" "spr/sprRight.bin" 0 8 1 0		// S E H M
+@vbmexport "spr/sprites.flf" "spr/sprLeft.bin" 40 48 1 0		// S E H M
+@vbmexport "spr/sprites.flf" "spr/sprVert1.bin" 80 88 1 0		// S E H M
+@vbmexport "spr/sprites.flf" "spr/sprVert2.bin" 120 128 1 0		// S E H M
+@vbmexport "chr/graphics.flf" "chr/graphics.bin" 0 5 1 0		// S E H M
+
+
+const aSprRight: address = $3e00;
+const aSprLeft:  address = aSprRight + (sprHeight*8);
+const aSprVert1: address = aSprLeft + (sprHeight*8);
+const aSprVert2: address = aSprVert1 + (sprHeight*8);
+const aChrGfx:   address = aSprVert2 + (sprHeight*8);
+
+sprRight: incbin("spr/sprRight.bin", aSprRight);
+sprLeft:  incbin("spr/sprLeft.bin", aSprLeft);
+sprVert1: incbin("spr/sprVert1.bin", aSprVert1);
+sprVert2: incbin("spr/sprVert2.bin", aSprVert2);
+chrGfx:   incbin("chr/graphics.bin", aChrGfx);
+
+
+
+
+// -------------------------------------------------------------------------------
+// Variables:
+// Zero Page: 			$35 - $63
+// Cassette buffer:		$033C-$03FB (828-1019)
+@startblock $2000 "GAME"
+
+	// game tick counter + 1 per FPS
+	ticks : byte at $35; 		// incremented 1 per frame
+	oldticks : byte at $3d;
+
+	// player variables
+	px, py: byte at $3e;
+	pd: byte at $40;
+	
+	i, j, k, m: byte at $41;
+
+// -------------------------------------------------------------------------------
+// Other data and programme start
+
+	p1, pa, pb, cm : pointer;
+
+
+
+	// pre-shifted addresses for Player Right - side A
+	sprRight_A: array[] of integer = (
+		aSprRight+m0a, aSprRight+m1a, aSprRight+m2a, aSprRight+m3a
+	);
+	// pre-shifted addresses for Player Right - side B
+	sprRight_B: array[] of integer = (
+		aSprRight+m0b, aSprRight+m1b, aSprRight+m2b, aSprRight+m3b
+	);
+
+	// pre-shifted addresses for Player Left - side A
+	sprLeft_A: array[] of integer = (
+		aSprLeft+m0a, aSprLeft+m1a, aSprLeft+m2a, aSprLeft+m3a
+	);
+	// pre-shifted addresses for Player Left - side B
+	sprLeft_B: array[] of integer = (
+		aSprLeft+m0b, aSprLeft+m1b, aSprLeft+m2b, aSprLeft+m3b
+	);
+
+	// pre-shifted addresses for Player Vert1 - side A
+	sprVert1_A: array[] of integer = (
+		aSprVert1+m0a, aSprVert1+m1a, aSprVert1+m2a, aSprVert1+m3a
+	);
+	// pre-shifted addresses for Player Vert1 - side B
+	sprVert1_B: array[] of integer = (
+		aSprVert1+m0b, aSprVert1+m1b, aSprVert1+m2b, aSprVert1+m3b
+	);
+	
+	// pre-shifted addresses for Player Vert21 - side A
+	sprVert2_A: array[] of integer = (
+		aSprVert2+m0a, aSprVert2+m1a, aSprVert2+m2a, aSprVert2+m3a
+	);
+	// pre-shifted addresses for Player Vert2 - side B
+	sprVert2_B: array[] of integer = (
+		aSprVert2+m0b, aSprVert2+m1b, aSprVert2+m2b, aSprVert2+m3b
+	);
+	
+	sprDir: array[] of integer = (
+		sprRight_A, sprRight_B, sprLeft_A, sprLeft_B,
+		sprVert1_A, sprVert1_B, sprVert2_A, sprVert2_B
+	);
+
+
+	const acol: address = $9400;
+	colmem: array[] of integer = (
+		acol, acol + (20*1), acol + (20*2), acol + (20*3), acol + (20*4),
+		acol + (20*5), acol + (20*6), acol + (20*7), acol + (20*8), acol + (20*9),
+		 acol + (20*10), acol + (20*11)
+	);
+
+// -------------------------------------------------------------------------------
+// GAME PARAMETERS
+
+
+
+
+
+
+// -------------------------------------------------------------------------------
+interrupt vbl();
+begin
+	StartIRQ(0);
+
+	ticks := (ticks + 1) & 63;
+
+	closeIRQ();
+end;
+
+procedure initVbl();
+begin
+
+	DisableVIC20IRQ();
+	
+	if (HSCROLL_REGISTER = 12) then
+	begin
+	
+		// Time the interrupt directly with the raster (PAL);
+		// 312 scanlines * 71 cycles -2 = $5686
+		//VIAIRQ(vbl(), $86, $56);
+		VIARasterIRQ(vbl(), 121, 0);
+	
+	end
+	else
+	begin
+	
+		// Time the interrupt directly with the raster (NTSC);
+		//VIAIRQ(vbl(), $43, $42);
+		VIARasterIRQ(vbl(), 107, 1);
+
+	end;
+
+end;
+
+
+procedure PlayerSetAnimation();
+begin
+
+	pa := int2ptr(sprDir[pd]);
+	pb := int2ptr(sprDir[pd+1]);
+
+end;
+
+procedure GenerateLevel();
+begin
+
+	for j := 0 to 20 do // X position
+	begin
+	
+		vbmSetColumn( j );
+		if j & 2 = 0 then k := 10;
+		
+		for i := 0 to 23 do // Y position
+		begin
+
+			screenmemory := screenmemory + 8;
+
+			if k > 0 then
+			if ( random() & 3 = 0) then
+			begin
+				k := k - 1;
+				m := ((random()&3)<<3);
+				p1 := chrGfx + m;
+				vbmDrawTileO( p1 );
+			end;
+			
+			
+
+		end;
+		
+	end;
+
+end;
+
+
+// -------------------------------------------------------------------------------
+// **** MAIN PROGRAM ****
+begin
+
+	initVbl(); // call before set display mode
+	
+	vbmSetDisplayMode( 0 );
+	vbmclear( 0 );
+	vbmClearColor( GREEN );	
+
+	AUX_COLOR_AND_VOLUME := %00000011;
+	screen_bg_color := BLACK + SCREEN_BG_BLACK;
+
+
+	GenerateLevel();
+
+
+	pd := 0;
+	PlayerSetAnimation();
+
+	while (true) offpage do 
+	begin
+	
+
+		vbmSetPosition2( px, py );
+		vbmDrawSprite8E( pa, pb );
+
+		@ifdef DEBUG
+		screen_bg_color := BLACK + SCREEN_BG_BLACK;
+		@endif
+		
+		while (ticks = oldticks) do begin end;
+		oldticks := ticks;
+
+		@ifdef DEBUG
+		screen_bg_color := CYAN + SCREEN_BG_BLACK;
+		@endif
+		
+		vbmSetPosition2( px, py );
+		vbmDrawSprite8E( pa, pb );
+
+
+		if ticks & 1 = 0 then
+		begin
+			readjoy1();
+		
+			// force in keyboard
+			if getkey() = KEY_I then joy1 := JOY_UP;
+			if getkey() = KEY_M then joy1 := JOY_DOWN;
+			if getkey() = KEY_J then joy1 := JOY_LEFT;
+			if getkey() = KEY_K then joy1 := JOY_RIGHT;
+
+			if (joy1 & JOY_UP) then begin py := py - 2; pd:=4+(py&4)>>1; PlayerSetAnimation(); end;
+			if (joy1 & JOY_DOWN) then begin py := py + 2; pd:=4+(py&4)>>1; PlayerSetAnimation(); end;
+			if (joy1 & JOY_LEFT) then begin px := px - 2; pd:=2; PlayerSetAnimation(); end;
+			if (joy1 & JOY_RIGHT) then begin px := px + 2; pd:=0; PlayerSetAnimation(); end;
+		
+			cm := addresstable(colmem, px>>3, py>>4);
+			cm[0] := white;
+
+		end;
+
+		
+	end;
+
+end.
