@@ -18,17 +18,18 @@ var
 	@ignoremethod "initjoystick"
 	@ignoremethod "initmoveto"
 	
-	// pre-shift sprite address offests for 8x8 sprites
+	// pre-shift sprite address offsets for 8x8 sprites
 	const sprHeight:byte = 8;
+	
+	// an 8x8 sprite needs 2 characters to move smoothly between them
+	// Enchanted Forest moves sprites 2 pixels at a time which requires
+	// four pre-shifted sprites of two characters each
+	
 	// side a (left)					side b (middle)	
 	const m0a:byte = $0;				const m0b:byte = sprHeight;
 	const m1a:byte = m0a+(sprHeight*2);	const m1b:byte = m0b+(sprHeight*2);
 	const m2a:byte = m1a+(sprHeight*2);	const m2b:byte = m1b+(sprHeight*2);
 	const m3a:byte = m2a+(sprHeight*2);	const m3b:byte = m2b+(sprHeight*2);	
-	const m4a:byte = m3a+(sprHeight*2);	const m4b:byte = m3b+(sprHeight*2);	
-	const m5a:byte = m4a+(sprHeight*2);	const m5b:byte = m4b+(sprHeight*2);	
-	const m6a:byte = m5a+(sprHeight*2);	const m6b:byte = m5b+(sprHeight*2);	
-	const m7a:byte = m6a+(sprHeight*2);	const m7b:byte = m6b+(sprHeight*2);	
 	
 
 // Address of bitmap (screen and characters)
@@ -49,11 +50,11 @@ var
 
 // -------------------------------------------------------------------------------
 // Include Resources
-@vbmexport "spr/sprites.flf" "spr/sprRight.bin" 0 8 1 0		// S E H M
+@vbmexport "spr/sprites.flf" "spr/sprRight.bin" 0 8 1 0			// S E H M
 @vbmexport "spr/sprites.flf" "spr/sprLeft.bin" 40 48 1 0		// S E H M
 @vbmexport "spr/sprites.flf" "spr/sprVert1.bin" 80 88 1 0		// S E H M
 @vbmexport "spr/sprites.flf" "spr/sprVert2.bin" 120 128 1 0		// S E H M
-@vbmexport "chr/graphics.flf" "chr/graphics.bin" 0 5 1 0		// S E H M
+@vbmexport "chr/graphics.flf" "chr/graphics.bin" 0 9 1 0		// S E H M
 
 
 const aSprRight: address = $3e00;
@@ -87,10 +88,14 @@ chrGfx:   incbin("chr/graphics.bin", aChrGfx);
 	
 	i, j, k, m: byte at $41;
 
+	musTime : byte at $45;
+	musDelay : byte at $46;
+	musSustain : byte at $47;
+	
 // -------------------------------------------------------------------------------
 // Other data and programme start
 
-	p1, pa, pb, cm : pointer;
+	p1, pa, pb, cm, m1, m2 : pointer;
 
 
 
@@ -144,6 +149,58 @@ chrGfx:   incbin("chr/graphics.bin", aChrGfx);
 	);
 
 // -------------------------------------------------------------------------------
+// Music - A Stillness in the Rain - snd ch3, sp 4
+musCh1: array[] of byte = (NOTE_C1, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_C1, 0, 0, 0, NOTE_Af0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_F0, 0, 
+0, 0, 0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 
+0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, NOTE_G0, 0, NOTE_F0, 0, 
+0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, 
+NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_Gf0, 0, 
+0, 0, NOTE_G0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F0, 0, 0, 0, 0, 0, NOTE_Gf0, 0, NOTE_F0, 0, 0, 0, 
+NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_C0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_C0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C1, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_C1, 0, 0, 0, NOTE_Af0, 0, 0, 0, 
+NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_F0, 0, 0, 0, 0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, 
+NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, 
+NOTE_Gf0, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_Gf0, 0, 0, 0, NOTE_G0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F0, NOTE_F0, 
+0, 0, 0, 0, NOTE_Gf0, 0, NOTE_F0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_C0, 0, 0, 0, NOTE_D0, 0, 0, 0, 
+NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,
+   1);
+
+
+// Music - Princess Mononoke Theme - snd ch2, sp 4
+musCh1b: array[] of byte = (NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_D1, 0, NOTE_D1, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, 0, 0, 0, 0, 
+NOTE_A1, 0, NOTE_G1, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_E1, 0, 
+NOTE_D1, 0, NOTE_A0, 0, 0, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_A0, 0, 
+NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_G1, 0, NOTE_D1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, 0, 0, 0, 0, NOTE_A1, 0, 
+NOTE_G1, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_E1, 0, NOTE_D1, 0, 
+NOTE_A0, 0, 0, 0, NOTE_C1, 0, NOTE_C1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, 
+NOTE_D1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_A0, 0, 0, 0, NOTE_C1, 0, NOTE_C1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_B1, 0, NOTE_A1, 0, 0, 0, 0, 0, NOTE_A1, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, 0, 0, 
+NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_G1, 0, 0, 0, NOTE_E1, 0, 0, 0, NOTE_C1, 0, NOTE_E1, 0, NOTE_B1, 0, 
+NOTE_B1, 0, NOTE_B1, 0, NOTE_C2, 0, NOTE_B1, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, 0, 0, NOTE_E1, 0, 0, 0, 
+NOTE_E1, 0, NOTE_E1, 0, NOTE_A1, 0, 0, 0, NOTE_G1, 0, NOTE_F1, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_E1, 0, 
+NOTE_G1, 0, NOTE_A1, 0, 0, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, NOTE_E1, 0, 0, 0, NOTE_G1, 0, NOTE_A1, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, 0, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, NOTE_E1, 0, 0, 0, NOTE_G1, 0, NOTE_A1, 0, 0,0,0,0,
+   1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -------------------------------------------------------------------------------
 // GAME PARAMETERS
 
 
@@ -158,6 +215,35 @@ begin
 
 	ticks := (ticks + 1) & 63;
 
+	musTime := musTime + 1;
+	if (musTime > musDelay) then
+	begin
+	
+		musTime := m1[0];
+		// reached end - restart music after intro part
+		if musTime = 1 then
+		begin
+			m1 := musCh1;
+			//m2 := musCh1;
+			
+			musTime := m1[0];
+		end;
+		if musTime <>0 then begin SOUND2_REGISTER := musTime; musSustain:=0; end;
+		if musTime = 0 then musSustain := musSustain+1;
+		if (musSustain = 7 or m1[1]<>0) then begin SOUND2_REGISTER := 0; musSustain:=0; end;		
+		
+		AUX_COLOR_AND_VOLUME := 3 - (musSustain>>2);
+		
+		//musTime := m2[0];
+		//SOUND3_REGISTER := musTime;
+		
+		musTime := 0;
+		// next note	
+		m1 := m1 + 1;
+		//m2 := m2 + 1;
+
+	end;
+	
 	closeIRQ();
 end;
 
@@ -231,13 +317,18 @@ end;
 // **** MAIN PROGRAM ****
 begin
 
+	m1 := musCh1;
+	//m2 := musCh1;
+	musDelay := 3;
+	musTime := 0;
+
 	initVbl(); // call before set display mode
 	
 	vbmSetDisplayMode( 0 );
 	vbmclear( 0 );
 	vbmClearColor( GREEN );	
 
-	AUX_COLOR_AND_VOLUME := %00000011;
+	AUX_COLOR_AND_VOLUME := %00000010;
 	screen_bg_color := BLACK + SCREEN_BG_BLACK;
 
 
