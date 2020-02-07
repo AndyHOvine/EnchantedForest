@@ -1,0 +1,9 @@
+
+// Set the animation pointers for the Player
+procedure Player_SetAnimation();
+begin
+
+	pa := int2ptr(sprDir[pd]);
+	pb := int2ptr(sprDir[pd+1]);
+
+end;

@@ -1,0 +1,128 @@
+procedure Music_Play();
+var
+
+// -------------------------------------------------------------------------------
+// Music - A Stillness in the Rain - snd ch3, sp 3 (or 4)
+musCh1b: array[] of byte = (NOTE_C1, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_C1, 0, 0, 0, NOTE_Af0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_F0, 0, 
+0, 0, 0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 
+0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, NOTE_G0, 0, NOTE_F0, 0, 
+0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, 
+NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_Gf0, 0, 
+0, 0, NOTE_G0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F0, 0, 0, 0, 0, 0, NOTE_Gf0, 0, NOTE_F0, 0, 0, 0, 
+NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_C0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_C0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C1, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_C1, 0, 0, 0, NOTE_Af0, 0, 0, 0, 
+NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_F0, 0, 0, 0, 0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, 
+NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, 
+NOTE_Gf0, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_Gf0, 0, 0, 0, NOTE_G0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F0, NOTE_F0, 
+0, 0, 0, 0, NOTE_Gf0, 0, NOTE_F0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_C0, 0, 0, 0, NOTE_D0, 0, 0, 0, 
+NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,
+   1);
+
+
+// Music - Princess Mononoke Theme - snd ch2, sp 6 (5 or 4)
+musCh1x: array[] of byte = (NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_D1, 0, NOTE_D1, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, 0, 0, 0, 0, 
+NOTE_A1, 0, NOTE_G1, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_E1, 0, 
+NOTE_D1, 0, NOTE_A0, 0, 0, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_A0, 0, 
+NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_G1, 0, NOTE_D1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, 0, 0, 0, 0, NOTE_A1, 0, 
+NOTE_G1, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_E1, 0, NOTE_D1, 0, 
+NOTE_A0, 0, 0, 0, NOTE_C1, 0, NOTE_C1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, 
+NOTE_D1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_A0, 0, 0, 0, NOTE_C1, 0, NOTE_C1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_B1, 0, NOTE_A1, 0, 0, 0, 0, 0, NOTE_A1, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, 0, 0, 
+NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_G1, 0, 0, 0, NOTE_E1, 0, 0, 0, NOTE_C1, 0, NOTE_E1, 0, NOTE_B1, 0, 
+NOTE_B1, 0, NOTE_B1, 0, NOTE_C2, 0, NOTE_B1, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, 0, 0, NOTE_E1, 0, 0, 0, 
+NOTE_E1, 0, NOTE_E1, 0, NOTE_A1, 0, 0, 0, NOTE_G1, 0, NOTE_F1, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_E1, 0, 
+NOTE_G1, 0, NOTE_A1, 0, 0, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, NOTE_E1, 0, 0, 0, NOTE_G1, 0, NOTE_A1, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, 0, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, NOTE_E1, 0, 0, 0, NOTE_G1, 0, NOTE_A1, 0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+   1);
+
+// Music - Mad World - ch1, sp 5
+musCh1: array[] of byte = (NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_G1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_G1, 0, 0, NOTE_Df1, 0, 0, NOTE_D1, 0, 0, NOTE_Af0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, NOTE_C2, 
+0, 0, NOTE_G1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_G1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 
+0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_C2, 
+0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 
+0, 0, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 
+0, NOTE_Gf1, 0, 0, NOTE_G1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 
+0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 
+0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_G1, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, NOTE_G1, 0, 0, NOTE_F1, 
+0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, 
+NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 
+0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 
+0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, NOTE_G1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, 
+NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 
+0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 
+0, 0, 0, 0, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 
+0, 0, 0, NOTE_Gf1, 0, 0, NOTE_G1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 
+0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 
+0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, 
+NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 
+0, NOTE_Af1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 
+0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 
+NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 
+0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, 
+NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_C2, 0, 0, 0, 0, 
+0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_G1, 
+0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 
+NOTE_G1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 
+0, NOTE_F1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 
+0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, 
+NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, NOTE_G1, 0, 0, NOTE_F1, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 
+0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 
+0, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 
+0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 
+0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 
+NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 
+0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 
+0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 
+0, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, NOTE_F1, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, 
+   1);
+
+begin
+
+	musTime := musTime + 1;
+	if (musTime > musDelay) then
+	begin
+	
+		musTime := m1[0];
+		// reached end - restart music after intro part
+		if musTime = 1 then
+		begin
+			m1 := musCh1;
+			//m2 := musCh1;
+			
+			musTime := m1[0];
+		end;
+		if musTime <>0 then begin SOUND1_REGISTER := musTime; musSustain:=0; end;
+		if musTime = 0 then musSustain := musSustain+1;
+		if (musSustain = SUSTAINTIME or m1[1]<>0) then begin SOUND1_REGISTER := 0; musSustain:=0; end;		
+		
+		AUX_COLOR_AND_VOLUME := 3 - (musSustain>>2);
+		
+		//musTime := m2[0];
+		//SOUND3_REGISTER := musTime;
+		
+		musTime := 0;
+		// next note	
+		m1 := m1 + 1;
+		//m2 := m2 + 1;
+
+	end;
+
+
+end;

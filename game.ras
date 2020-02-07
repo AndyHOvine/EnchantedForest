@@ -10,6 +10,11 @@ var
 
 @define DEBUG		1
 
+
+	// Address of bitmap (screen and characters)
+	@userdata $1000 $1FFF "Bitmap"
+
+
 	// I need to save some bytes, I don't use these
 	@ignoremethod "init16x8mul"
 	@ignoremethod "init16x8div"
@@ -18,6 +23,12 @@ var
 	@ignoremethod "initjoystick"
 	@ignoremethod "initmoveto"
 	
+
+
+// -------------------------------------------------------------------------------
+// GAME PARAMETERS and CONSTANTS
+
+
 	// pre-shift sprite address offsets for 8x8 sprites
 	const sprHeight:byte = 8;
 	
@@ -32,14 +43,8 @@ var
 	const m3a:byte = m2a+(sprHeight*2);	const m3b:byte = m2b+(sprHeight*2);	
 	
 
-// Address of bitmap (screen and characters)
-@userdata $1000 $1FFF "Bitmap"
 
-
-
-
-// -------------------------------------------------------------------------------
-// Parameters
+	const SUSTAINTIME: byte = 9;  // max length of time for musical note
 
 
 
@@ -55,7 +60,6 @@ var
 @vbmexport "spr/sprites.flf" "spr/sprVert1.bin" 80 88 1 0		// S E H M
 @vbmexport "spr/sprites.flf" "spr/sprVert2.bin" 120 128 1 0		// S E H M
 @vbmexport "chr/graphics.flf" "chr/graphics.bin" 0 9 1 0		// S E H M
-
 
 const aSprRight: address = $3e00;
 const aSprLeft:  address = aSprRight + (sprHeight*8);
@@ -73,10 +77,11 @@ chrGfx:   incbin("chr/graphics.bin", aChrGfx);
 
 
 // -------------------------------------------------------------------------------
-// Variables:
+// Variables:	(for assignable/changing data, use these addresses)
+
 // Zero Page: 			$35 - $63
 // Cassette buffer:		$033C-$03FB (828-1019)
-@startblock $2000 "GAME"
+
 
 	// game tick counter + 1 per FPS
 	ticks : byte at $35; 		// incremented 1 per frame
@@ -92,13 +97,18 @@ chrGfx:   incbin("chr/graphics.bin", aChrGfx);
 	musDelay : byte at $46;
 	musSustain : byte at $47;
 	
-// -------------------------------------------------------------------------------
-// Other data and programme start
 
+@startblock $2000 "GAME"
+// Data:	(for non-assignable data and lookups)
+
+
+	// Working Zero Page pointers
 	p1, pa, pb, cm, m1, m2 : pointer;
 
 
 
+	// ------------- Player sprite look up addresses -------------
+	
 	// pre-shifted addresses for Player Right - side A
 	sprRight_A: array[] of integer = (
 		aSprRight+m0a, aSprRight+m1a, aSprRight+m2a, aSprRight+m3a
@@ -141,6 +151,9 @@ chrGfx:   incbin("chr/graphics.bin", aChrGfx);
 	);
 
 
+
+	// ------------- Colour memory look up addresses -------------
+
 	const acol: address = $9400;
 	colmem: array[] of integer = (
 		acol, acol + (20*1), acol + (20*2), acol + (20*3), acol + (20*4),
@@ -148,52 +161,6 @@ chrGfx:   incbin("chr/graphics.bin", aChrGfx);
 		 acol + (20*10), acol + (20*11)
 	);
 
-// -------------------------------------------------------------------------------
-// Music - A Stillness in the Rain - snd ch3, sp 4
-musCh1: array[] of byte = (NOTE_C1, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_C1, 0, 0, 0, NOTE_Af0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_F0, 0, 
-0, 0, 0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 
-0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, NOTE_G0, 0, NOTE_F0, 0, 
-0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, 
-NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_Gf0, 0, 
-0, 0, NOTE_G0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F0, 0, 0, 0, 0, 0, NOTE_Gf0, 0, NOTE_F0, 0, 0, 0, 
-NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_C0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_C0, 0, 
-0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C1, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_C1, 0, 0, 0, NOTE_Af0, 0, 0, 0, 
-NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_F0, 0, 0, 0, 0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 
-0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, 
-NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, 
-NOTE_Gf0, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_Gf0, 0, 0, 0, NOTE_G0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F0, NOTE_F0, 
-0, 0, 0, 0, NOTE_Gf0, 0, NOTE_F0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_C0, 0, 0, 0, NOTE_D0, 0, 0, 0, 
-NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,
-   1);
-
-
-// Music - Princess Mononoke Theme - snd ch2, sp 4
-musCh1b: array[] of byte = (NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_D1, 0, NOTE_D1, 0, 0, 0, 0, 0, 
-0, 0, 0, 0, 0, 0, NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, 0, 0, 
-0, 0, 0, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, 0, 0, 0, 0, 
-NOTE_A1, 0, NOTE_G1, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_E1, 0, 
-NOTE_D1, 0, NOTE_A0, 0, 0, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_A0, 0, 
-NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_G1, 0, NOTE_D1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-0, 0, 0, 0, NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, 0, 0, 0, 0, 
-0, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, 0, 0, 0, 0, NOTE_A1, 0, 
-NOTE_G1, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_E1, 0, NOTE_D1, 0, 
-NOTE_A0, 0, 0, 0, NOTE_C1, 0, NOTE_C1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, 
-NOTE_D1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_A0, 0, 0, 0, NOTE_C1, 0, NOTE_C1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-0, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_B1, 0, NOTE_A1, 0, 0, 0, 0, 0, NOTE_A1, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, 0, 0, 
-NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_G1, 0, 0, 0, NOTE_E1, 0, 0, 0, NOTE_C1, 0, NOTE_E1, 0, NOTE_B1, 0, 
-NOTE_B1, 0, NOTE_B1, 0, NOTE_C2, 0, NOTE_B1, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, 0, 0, NOTE_E1, 0, 0, 0, 
-NOTE_E1, 0, NOTE_E1, 0, NOTE_A1, 0, 0, 0, NOTE_G1, 0, NOTE_F1, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_E1, 0, 
-NOTE_G1, 0, NOTE_A1, 0, 0, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, NOTE_E1, 0, 0, 0, NOTE_G1, 0, NOTE_A1, 0, 0, 0, 0, 0, 0, 0, 
-0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, 0, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, NOTE_E1, 0, 0, 0, NOTE_G1, 0, NOTE_A1, 0, 0,0,0,0,
-   1);
-
-
-
-
-
-
-
 
 
 
@@ -201,128 +168,29 @@ NOTE_G1, 0, NOTE_A1, 0, 0, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, NOTE_E1, 0, 0, 0, NO
 
 
 // -------------------------------------------------------------------------------
-// GAME PARAMETERS
+// Include files
+
+@include "music.ras"
+@include "vbl.ras"
+@include "level.ras"
+@include "player.ras"
 
 
 
 
-
-
-// -------------------------------------------------------------------------------
-interrupt vbl();
-begin
-	StartIRQ(0);
-
-	ticks := (ticks + 1) & 63;
-
-	musTime := musTime + 1;
-	if (musTime > musDelay) then
-	begin
-	
-		musTime := m1[0];
-		// reached end - restart music after intro part
-		if musTime = 1 then
-		begin
-			m1 := musCh1;
-			//m2 := musCh1;
-			
-			musTime := m1[0];
-		end;
-		if musTime <>0 then begin SOUND2_REGISTER := musTime; musSustain:=0; end;
-		if musTime = 0 then musSustain := musSustain+1;
-		if (musSustain = 7 or m1[1]<>0) then begin SOUND2_REGISTER := 0; musSustain:=0; end;		
-		
-		AUX_COLOR_AND_VOLUME := 3 - (musSustain>>2);
-		
-		//musTime := m2[0];
-		//SOUND3_REGISTER := musTime;
-		
-		musTime := 0;
-		// next note	
-		m1 := m1 + 1;
-		//m2 := m2 + 1;
-
-	end;
-	
-	closeIRQ();
-end;
-
-procedure initVbl();
-begin
-
-	DisableVIC20IRQ();
-	
-	if (HSCROLL_REGISTER = 12) then
-	begin
-	
-		// Time the interrupt directly with the raster (PAL);
-		// 312 scanlines * 71 cycles -2 = $5686
-		//VIAIRQ(vbl(), $86, $56);
-		VIARasterIRQ(vbl(), 121, 0);
-	
-	end
-	else
-	begin
-	
-		// Time the interrupt directly with the raster (NTSC);
-		//VIAIRQ(vbl(), $43, $42);
-		VIARasterIRQ(vbl(), 107, 1);
-
-	end;
-
-end;
-
-
-procedure PlayerSetAnimation();
-begin
-
-	pa := int2ptr(sprDir[pd]);
-	pb := int2ptr(sprDir[pd+1]);
-
-end;
-
-procedure GenerateLevel();
-begin
-
-	for j := 0 to 20 do // X position
-	begin
-	
-		vbmSetColumn( j );
-		if j & 2 = 0 then k := 10;
-		
-		for i := 0 to 23 do // Y position
-		begin
-
-			screenmemory := screenmemory + 8;
-
-			if k > 0 then
-			if ( random() & 3 = 0) then
-			begin
-				k := k - 1;
-				m := ((random()&3)<<3);
-				p1 := chrGfx + m;
-				vbmDrawTileO( p1 );
-			end;
-			
-			
-
-		end;
-		
-	end;
-
-end;
 
 
 // -------------------------------------------------------------------------------
 // **** MAIN PROGRAM ****
+
 begin
 
 	m1 := musCh1;
 	//m2 := musCh1;
-	musDelay := 3;
+	musDelay := 5;
 	musTime := 0;
 
-	initVbl(); // call before set display mode
+	Vbl_Init(); // call before set display mode
 	
 	vbmSetDisplayMode( 0 );
 	vbmclear( 0 );
@@ -332,11 +200,11 @@ begin
 	screen_bg_color := BLACK + SCREEN_BG_BLACK;
 
 
-	GenerateLevel();
+	Level_Generate();
 
 
 	pd := 0;
-	PlayerSetAnimation();
+	Player_SetAnimation();
 
 	while (true) offpage do 
 	begin
@@ -370,10 +238,10 @@ begin
 			if getkey() = KEY_J then joy1 := JOY_LEFT;
 			if getkey() = KEY_K then joy1 := JOY_RIGHT;
 
-			if (joy1 & JOY_UP) then begin py := py - 2; pd:=4+(py&4)>>1; PlayerSetAnimation(); end;
-			if (joy1 & JOY_DOWN) then begin py := py + 2; pd:=4+(py&4)>>1; PlayerSetAnimation(); end;
-			if (joy1 & JOY_LEFT) then begin px := px - 2; pd:=2; PlayerSetAnimation(); end;
-			if (joy1 & JOY_RIGHT) then begin px := px + 2; pd:=0; PlayerSetAnimation(); end;
+			if (joy1 & JOY_UP) then begin py := py - 2; pd:=4+(py&4)>>1; Player_SetAnimation(); end;
+			if (joy1 & JOY_DOWN) then begin py := py + 2; pd:=4+(py&4)>>1; Player_SetAnimation(); end;
+			if (joy1 & JOY_LEFT) then begin px := px - 2; pd:=2; Player_SetAnimation(); end;
+			if (joy1 & JOY_RIGHT) then begin px := px + 2; pd:=0; Player_SetAnimation(); end;
 		
 			cm := addresstable(colmem, px>>3, py>>4);
 			cm[0] := white;
