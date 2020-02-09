@@ -1,3 +1,5 @@
+
+// -------------------------------------------------------------------------------
 // ------------- Player sprite look up addresses -------------
 	
 // pre-shifted addresses for Player Right - side A
@@ -44,11 +46,112 @@ sprDir: array[] of integer = (
 
 
 
+
+
+// -------------------------------------------------------------------------------
 // ------------- Colour memory look up addresses -------------
 
-const acol: address = $9400;
-colmem: array[] of integer = (
-	acol, acol + (20*1), acol + (20*2), acol + (20*3), acol + (20*4),
-	acol + (20*5), acol + (20*6), acol + (20*7), acol + (20*8), acol + (20*9),
-	acol + (20*10), acol + (20*11)
-);
+	const acol: address = $9400;
+	colmem: array[] of integer = (
+		acol, acol + (20*1), acol + (20*2), acol + (20*3), acol + (20*4),
+		acol + (20*5), acol + (20*6), acol + (20*7), acol + (20*8), acol + (20*9),
+		acol + (20*10), acol + (20*11)
+	);
+
+
+
+
+
+
+// -------------------------------------------------------------------------------
+// Music - A Stillness in the Rain - snd ch3, sp 3 (or 4)
+
+musCh1b: array[] of byte = (NOTE_C1, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_C1, 0, 0, 0, NOTE_Af0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_F0, 0, 
+0, 0, 0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 
+0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, NOTE_G0, 0, NOTE_F0, 0, 
+0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, 
+NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_Gf0, 0, 
+0, 0, NOTE_G0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F0, 0, 0, 0, 0, 0, NOTE_Gf0, 0, NOTE_F0, 0, 0, 0, 
+NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_C0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_C0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_C1, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_C1, 0, 0, 0, NOTE_Af0, 0, 0, 0, 
+NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_F0, 0, 0, 0, 0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, 
+NOTE_G0, 0, 0, 0, NOTE_Gf0, 0, NOTE_G0, 0, NOTE_F0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, NOTE_C0, 0, 0, 0, 0, 0, NOTE_D0, 0, NOTE_Df0, 0, NOTE_F0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_G0, 0, 0, 0, 
+NOTE_Gf0, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_Gf0, 0, 0, 0, NOTE_G0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F0, NOTE_F0, 
+0, 0, 0, 0, NOTE_Gf0, 0, NOTE_F0, 0, 0, 0, NOTE_G0, 0, 0, 0, NOTE_Df0, 0, 0, 0, NOTE_C0, 0, 0, 0, NOTE_D0, 0, 0, 0, 
+NOTE_Df0, 0, 0, 0, NOTE_D0, 0, 0, 0, NOTE_C0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,
+   1);
+
+
+// Music - Princess Mononoke Theme - snd ch2, sp 6 (5 or 4)
+musCh1x: array[] of byte = (NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_D1, 0, NOTE_D1, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, 0, 0, 0, 0, 
+NOTE_A1, 0, NOTE_G1, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_E1, 0, 
+NOTE_D1, 0, NOTE_A0, 0, 0, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_A0, 0, 
+NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_G1, 0, NOTE_D1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_A0, 0, NOTE_E1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_E1, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, 0, 0, 0, 0, NOTE_A1, 0, 
+NOTE_G1, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_D1, 0, NOTE_E1, 0, NOTE_D1, 0, 
+NOTE_A0, 0, 0, 0, NOTE_C1, 0, NOTE_C1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, NOTE_D1, 0, 
+NOTE_D1, 0, NOTE_E1, 0, NOTE_D1, 0, NOTE_A0, 0, 0, 0, NOTE_C1, 0, NOTE_C1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_A1, 0, NOTE_B1, 0, NOTE_A1, 0, 0, 0, 0, 0, NOTE_A1, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, 0, 0, 
+NOTE_E1, 0, 0, 0, 0, 0, 0, 0, NOTE_D1, 0, 0, 0, NOTE_G1, 0, 0, 0, NOTE_E1, 0, 0, 0, NOTE_C1, 0, NOTE_E1, 0, NOTE_B1, 0, 
+NOTE_B1, 0, NOTE_B1, 0, NOTE_C2, 0, NOTE_B1, 0, 0, 0, 0, 0, NOTE_C1, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, 0, 0, NOTE_E1, 0, 0, 0, 
+NOTE_E1, 0, NOTE_E1, 0, NOTE_A1, 0, 0, 0, NOTE_G1, 0, NOTE_F1, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_E1, 0, 
+NOTE_G1, 0, NOTE_A1, 0, 0, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, NOTE_E1, 0, 0, 0, NOTE_G1, 0, NOTE_A1, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_E1, 0, NOTE_G1, 0, NOTE_A1, 0, 0, 0, NOTE_C2, 0, 0, 0, NOTE_B1, 0, NOTE_E1, 0, 0, 0, NOTE_G1, 0, NOTE_A1, 0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+   1);
+
+// Music - Mad World - ch1, sp 5
+musCh1: array[] of byte = (NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_G1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_G1, 0, 0, NOTE_Df1, 0, 0, NOTE_D1, 0, 0, NOTE_Af0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, NOTE_C2, 
+0, 0, NOTE_G1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_G1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 
+0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_C2, 
+0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 
+0, 0, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 
+0, NOTE_Gf1, 0, 0, NOTE_G1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 
+0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 
+0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_G1, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, NOTE_G1, 0, 0, NOTE_F1, 
+0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, 
+NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 
+0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 
+0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, NOTE_G1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, 
+NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 
+0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 
+0, 0, 0, 0, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 
+0, 0, 0, NOTE_Gf1, 0, 0, NOTE_G1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 
+0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 
+0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, 
+NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 
+0, NOTE_Af1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 
+0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 
+NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 
+0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, 
+NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_C2, 0, 0, 0, 0, 
+0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_G1, 
+0, 0, 0, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 
+NOTE_G1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_F1, 0, 
+0, NOTE_F1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_C2, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 
+0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_G1, 0, 0, 0, 0, 0, 0, 0, 0, 
+NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, NOTE_G1, 0, 0, NOTE_F1, 0, 0, 0, 0, 
+0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 
+0, 0, 0, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 
+0, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 
+0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 
+0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, NOTE_Af1, 0, 0, 
+NOTE_D2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, NOTE_Gf1, 0, 
+0, NOTE_Gf1, 0, 0, NOTE_C2, 0, 0, NOTE_C2, 0, 0, NOTE_D2, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, NOTE_D2, 0, 0, NOTE_D2, 
+0, 0, NOTE_Af1, 0, 0, NOTE_Af1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 
+0, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, NOTE_F1, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, NOTE_Gf1, 0, 0, 0, 0, 0, 0, 0, 0, NOTE_F1, 0, 0, 0, 0, 0, 0, 0, 0, 
+   1);

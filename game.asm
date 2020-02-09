@@ -18,27 +18,290 @@ m = $44
 musTime = $45
 musDelay = $46
 musSustain = $47
- ; Temp vars section
- ; Temp vars section ends
-	org $2000
 p1	= $64
 pa	= $66
 pb	= $68
 cm	= $6A
 m1	= $6C
-m2	= $6E
-sprRight_A	dc.w $03e00, $03e10, $03e20, $03e30
-sprRight_B	dc.w $03e08, $03e18, $03e28, $03e38
-sprLeft_A	dc.w $03e40, $03e50, $03e60, $03e70
-sprLeft_B	dc.w $03e48, $03e58, $03e68, $03e78
-sprVert1_A	dc.w $03e80, $03e90, $03ea0, $03eb0
-sprVert1_B	dc.w $03e88, $03e98, $03ea8, $03eb8
-sprVert2_A	dc.w $03ec0, $03ed0, $03ee0, $03ef0
-sprVert2_B	dc.w $03ec8, $03ed8, $03ee8, $03ef8
+ ; Temp vars section
+ ; Temp vars section ends
+	org $2000
+sprRight_A	dc.w $03a00, $03a10, $03a20, $03a30
+sprRight_B	dc.w $03a08, $03a18, $03a28, $03a38
+sprLeft_A	dc.w $03a40, $03a50, $03a60, $03a70
+sprLeft_B	dc.w $03a48, $03a58, $03a68, $03a78
+sprVert1_A	dc.w $03a80, $03a90, $03aa0, $03ab0
+sprVert1_B	dc.w $03a88, $03a98, $03aa8, $03ab8
+sprVert2_A	dc.w $03ac0, $03ad0, $03ae0, $03af0
+sprVert2_B	dc.w $03ac8, $03ad8, $03ae8, $03af8
 sprDir	dc.w sprRight_A, sprRight_B, sprLeft_A, sprLeft_B, sprVert1_A, sprVert1_B, sprVert2_A, sprVert2_B
 	dc.w 
 colmem	dc.w $09400, $09414, $09428, $0943c, $09450, $09464, $09478, $0948c
 	dc.w $094a0, $094b4, $094c8, $094dc
+musCh1b	dc.b $0c3, $00, $00, $00, $00, $00, $0c9, $00
+	dc.b $0c3, $00, $00, $00, $0bb, $00, $00, $00
+	dc.b $0af, $00, $00, $00, $097, $00, $00, $00
+	dc.b $0a3, $00, $00, $00, $00, $00, $0af, $00
+	dc.b $0a3, $00, $00, $00, $093, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $087, $00, $00, $00, $00, $00, $093, $00
+	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
+	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
+	dc.b $0b3, $00, $0af, $00, $0a3, $00, $00, $00
+	dc.b $097, $00, $00, $00, $093, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $087, $00, $00, $00, $00, $00, $093, $00
+	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
+	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
+	dc.b $0b3, $00, $00, $00, $00, $00, $0c3, $00
+	dc.b $0b3, $00, $00, $00, $0af, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0a3, $00, $00, $00, $00, $00, $0b3, $00
+	dc.b $0a3, $00, $00, $00, $0af, $00, $00, $00
+	dc.b $097, $00, $00, $00, $087, $00, $00, $00
+	dc.b $093, $00, $00, $00, $097, $00, $00, $00
+	dc.b $093, $00, $00, $00, $087, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0c3, $00, $00, $00, $00, $00, $0c9, $00
+	dc.b $0c3, $00, $00, $00, $0bb, $00, $00, $00
+	dc.b $0af, $00, $00, $00, $097, $00, $00, $00
+	dc.b $0a3, $00, $00, $00, $00, $00, $0af, $00
+	dc.b $0a3, $00, $00, $00, $093, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $087, $00, $00, $00, $00, $00, $093, $00
+	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
+	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
+	dc.b $0b3, $00, $0af, $00, $0a3, $00, $00, $00
+	dc.b $097, $00, $00, $00, $093, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $087, $00, $00, $00, $00, $00, $093, $00
+	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
+	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
+	dc.b $0b3, $00, $00, $00, $00, $00, $0c3, $00
+	dc.b $0b3, $00, $00, $00, $0af, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0a3, $0a3, $00, $00, $00, $00, $0b3, $00
+	dc.b $0a3, $00, $00, $00, $0af, $00, $00, $00
+	dc.b $097, $00, $00, $00, $087, $00, $00, $00
+	dc.b $093, $00, $00, $00, $097, $00, $00, $00
+	dc.b $093, $00, $00, $00, $087, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $01
+musCh1x	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
+	dc.b $0cf, $00, $00, $00, $00, $00, $0cf, $00
+	dc.b $0d7, $00, $0c9, $00, $0c9, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
+	dc.b $0cf, $00, $00, $00, $00, $00, $0cf, $00
+	dc.b $0d7, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $0cf, $00, $0d7, $00
+	dc.b $0db, $00, $0db, $00, $0db, $00, $0db, $00
+	dc.b $0db, $00, $00, $00, $00, $00, $0db, $00
+	dc.b $0d7, $00, $00, $00, $0c9, $00, $00, $00
+	dc.b $0cf, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0c9, $00, $0c9, $00, $0c9, $00, $0cf, $00
+	dc.b $0c9, $00, $0b7, $00, $00, $00, $0c9, $00
+	dc.b $0cf, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
+	dc.b $0cf, $00, $00, $00, $00, $00, $0d7, $00
+	dc.b $0c9, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
+	dc.b $0cf, $00, $00, $00, $00, $00, $0cf, $00
+	dc.b $0d7, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $0cf, $00, $0d7, $00
+	dc.b $0db, $00, $0db, $00, $0db, $00, $0db, $00
+	dc.b $0db, $00, $00, $00, $00, $00, $0db, $00
+	dc.b $0d7, $00, $00, $00, $0c9, $00, $00, $00
+	dc.b $0cf, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0c9, $00, $0c9, $00, $0c9, $00, $0cf, $00
+	dc.b $0c9, $00, $0b7, $00, $00, $00, $0c3, $00
+	dc.b $0c3, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0c9, $00, $0c9, $00, $0c9, $00, $0cf, $00
+	dc.b $0c9, $00, $0b7, $00, $00, $00, $0c3, $00
+	dc.b $0c3, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0db, $00, $0db, $00, $0db, $00, $0df, $00
+	dc.b $0db, $00, $00, $00, $00, $00, $0db, $00
+	dc.b $0e1, $00, $00, $00, $0df, $00, $00, $00
+	dc.b $0cf, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0c9, $00, $00, $00, $0d7, $00, $00, $00
+	dc.b $0cf, $00, $00, $00, $0c3, $00, $0cf, $00
+	dc.b $0df, $00, $0df, $00, $0df, $00, $0e1, $00
+	dc.b $0df, $00, $00, $00, $00, $00, $0c3, $00
+	dc.b $0e1, $00, $00, $00, $0df, $00, $00, $00
+	dc.b $0cf, $00, $00, $00, $0cf, $00, $0cf, $00
+	dc.b $0db, $00, $00, $00, $0d7, $00, $0d1, $00
+	dc.b $0d7, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $0cf, $00, $0d7, $00
+	dc.b $0db, $00, $00, $00, $0e1, $00, $00, $00
+	dc.b $0df, $00, $0cf, $00, $00, $00, $0d7, $00
+	dc.b $0db, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $0cf, $00, $0d7, $00
+	dc.b $0db, $00, $00, $00, $0e1, $00, $00, $00
+	dc.b $0df, $00, $0cf, $00, $00, $00, $0d7, $00
+	dc.b $0db, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $01
+musCh1	dc.b $0d9, $00, $00, $0e1, $00, $00, $0d7, $00
+	dc.b $00, $0d9, $00, $00, $0d1, $00, $00, $0d7
+	dc.b $00, $00, $0cb, $00, $00, $0c9, $00, $00
+	dc.b $0bb, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
+	dc.b $00, $00, $00, $0e1, $00, $00, $0d7, $00
+	dc.b $00, $0d9, $00, $00, $0d1, $00, $00, $0d7
+	dc.b $00, $00, $0d9, $00, $00, $0dd, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
+	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
+	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
+	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
+	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
+	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
+	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
+	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
+	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
+	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
+	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
+	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
+	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
+	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
+	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
+	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
+	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
+	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
+	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
+	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
+	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
+	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
+	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
+	dc.b $0e4, $00, $00, $0dd, $00, $00, $00, $00
+	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
+	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
+	dc.b $0d1, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
+	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
+	dc.b $0e4, $00, $00, $0dd, $00, $00, $0dd, $00
+	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
+	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
+	dc.b $0d1, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
+	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
+	dc.b $0e4, $00, $00, $0dd, $00, $00, $00, $00
+	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
+	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
+	dc.b $0d1, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
+	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
+	dc.b $0e4, $00, $00, $0dd, $00, $00, $0dd, $00
+	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
+	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $0d9, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $0d1, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $0d9, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $0d1, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $0d1, $00, $00, $0d1
+	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
+	dc.b $0d1, $00, $00, $0d1, $00, $00, $0e1, $00
+	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0e1
+	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
+	dc.b $00, $00, $00, $00, $00, $0d7, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
+	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
+	dc.b $0d7, $00, $00, $0d1, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $0d1, $00, $00, $0d1
+	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
+	dc.b $0d1, $00, $00, $0d1, $00, $00, $0e1, $00
+	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0e1
+	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
+	dc.b $00, $00, $00, $00, $00, $0d7, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
+	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
+	dc.b $0d7, $00, $00, $0d1, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $0d1, $00, $00, $0d1
+	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
+	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
+	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $0d1, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
+	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
+	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
+	dc.b $00, $0dd, $00, $00, $0dd, $00, $00, $0dd
+	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $0d1, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
+	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
+	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
+	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
+	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $0d1, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
+	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
+	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
+	dc.b $00, $0dd, $00, $00, $0dd, $00, $00, $0dd
+	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
+	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $0d9, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $0d1, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $00, $00, $0d9, $00, $00, $00, $00, $00
+	dc.b $00, $00, $00, $0d1, $00, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
+	dc.b $0d9, $00, $00, $0d9, $00, $00, $0d9, $00
+	dc.b $00, $00, $00, $00, $0d1, $00, $00, $00
+	dc.b $00, $00, $00, $00, $00, $00, $0d9, $00
+	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
+	dc.b $00, $00, $00, $00, $00, $00, $00, $00
+	dc.b $01
 	
 	
 	; ***********  Defining procedure : initVbm
@@ -477,6 +740,24 @@ initrandom256_RandomSkip6334
 	eor $9124
 	rts
 	
+; // Music pointer
+; // -------------------------------------------------------------------------------
+; // Data
+; // player sprites
+; // S E H M
+; // S E H M
+; // S E H M
+; // S E H M
+; // forest graphics
+; // S E H M
+; // S W H M
+; // memory - load addresses
+; // incbin data
+; // Include Resources and variables
+; // -------------------------------------------------------------------------------
+; // -------------------------------------------------------------------------------
+; // look up data
+; // -------------------------------------------------------------------------------
 ; // ------------- Player sprite look up addresses -------------
 ; // pre-shifted addresses for Player Right - side A
 ; // pre-shifted addresses for Player Right - side B
@@ -486,289 +767,25 @@ initrandom256_RandomSkip6334
 ; // pre-shifted addresses for Player Vert1 - side B
 ; // pre-shifted addresses for Player Vert21 - side A
 ; // pre-shifted addresses for Player Vert2 - side B
+; // -------------------------------------------------------------------------------
 ; // ------------- Colour memory look up addresses -------------
 ; // -------------------------------------------------------------------------------
-; // Include files
+; // Music - A Stillness in the Rain - snd ch3, sp 3 (or 4)
+; // Music - Princess Mononoke Theme - snd ch2, sp 6 (5 or 4)
+; // Music - Mad World - ch1, sp 5
+; // -------------------------------------------------------------------------------
+; // source files
 	
 	
 	; ***********  Defining procedure : Music_Play
 	;    Procedure type : User-defined procedure
 	
-musCh1b	dc.b $0c3, $00, $00, $00, $00, $00, $0c9, $00
-	dc.b $0c3, $00, $00, $00, $0bb, $00, $00, $00
-	dc.b $0af, $00, $00, $00, $097, $00, $00, $00
-	dc.b $0a3, $00, $00, $00, $00, $00, $0af, $00
-	dc.b $0a3, $00, $00, $00, $093, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $087, $00, $00, $00, $00, $00, $093, $00
-	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $0b3, $00, $0af, $00, $0a3, $00, $00, $00
-	dc.b $097, $00, $00, $00, $093, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $087, $00, $00, $00, $00, $00, $093, $00
-	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $0b3, $00, $00, $00, $00, $00, $0c3, $00
-	dc.b $0b3, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0a3, $00, $00, $00, $00, $00, $0b3, $00
-	dc.b $0a3, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $087, $00, $00, $00
-	dc.b $093, $00, $00, $00, $097, $00, $00, $00
-	dc.b $093, $00, $00, $00, $087, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0c3, $00, $00, $00, $00, $00, $0c9, $00
-	dc.b $0c3, $00, $00, $00, $0bb, $00, $00, $00
-	dc.b $0af, $00, $00, $00, $097, $00, $00, $00
-	dc.b $0a3, $00, $00, $00, $00, $00, $0af, $00
-	dc.b $0a3, $00, $00, $00, $093, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $087, $00, $00, $00, $00, $00, $093, $00
-	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $0b3, $00, $0af, $00, $0a3, $00, $00, $00
-	dc.b $097, $00, $00, $00, $093, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $087, $00, $00, $00, $00, $00, $093, $00
-	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $0b3, $00, $00, $00, $00, $00, $0c3, $00
-	dc.b $0b3, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0a3, $0a3, $00, $00, $00, $00, $0b3, $00
-	dc.b $0a3, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $087, $00, $00, $00
-	dc.b $093, $00, $00, $00, $097, $00, $00, $00
-	dc.b $093, $00, $00, $00, $087, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $01
-musCh1x	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
-	dc.b $0cf, $00, $00, $00, $00, $00, $0cf, $00
-	dc.b $0d7, $00, $0c9, $00, $0c9, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
-	dc.b $0cf, $00, $00, $00, $00, $00, $0cf, $00
-	dc.b $0d7, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0cf, $00, $0d7, $00
-	dc.b $0db, $00, $0db, $00, $0db, $00, $0db, $00
-	dc.b $0db, $00, $00, $00, $00, $00, $0db, $00
-	dc.b $0d7, $00, $00, $00, $0c9, $00, $00, $00
-	dc.b $0cf, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0c9, $00, $0c9, $00, $0c9, $00, $0cf, $00
-	dc.b $0c9, $00, $0b7, $00, $00, $00, $0c9, $00
-	dc.b $0cf, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
-	dc.b $0cf, $00, $00, $00, $00, $00, $0d7, $00
-	dc.b $0c9, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
-	dc.b $0cf, $00, $00, $00, $00, $00, $0cf, $00
-	dc.b $0d7, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0cf, $00, $0d7, $00
-	dc.b $0db, $00, $0db, $00, $0db, $00, $0db, $00
-	dc.b $0db, $00, $00, $00, $00, $00, $0db, $00
-	dc.b $0d7, $00, $00, $00, $0c9, $00, $00, $00
-	dc.b $0cf, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0c9, $00, $0c9, $00, $0c9, $00, $0cf, $00
-	dc.b $0c9, $00, $0b7, $00, $00, $00, $0c3, $00
-	dc.b $0c3, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0c9, $00, $0c9, $00, $0c9, $00, $0cf, $00
-	dc.b $0c9, $00, $0b7, $00, $00, $00, $0c3, $00
-	dc.b $0c3, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0db, $00, $0db, $00, $0db, $00, $0df, $00
-	dc.b $0db, $00, $00, $00, $00, $00, $0db, $00
-	dc.b $0e1, $00, $00, $00, $0df, $00, $00, $00
-	dc.b $0cf, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0c9, $00, $00, $00, $0d7, $00, $00, $00
-	dc.b $0cf, $00, $00, $00, $0c3, $00, $0cf, $00
-	dc.b $0df, $00, $0df, $00, $0df, $00, $0e1, $00
-	dc.b $0df, $00, $00, $00, $00, $00, $0c3, $00
-	dc.b $0e1, $00, $00, $00, $0df, $00, $00, $00
-	dc.b $0cf, $00, $00, $00, $0cf, $00, $0cf, $00
-	dc.b $0db, $00, $00, $00, $0d7, $00, $0d1, $00
-	dc.b $0d7, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0cf, $00, $0d7, $00
-	dc.b $0db, $00, $00, $00, $0e1, $00, $00, $00
-	dc.b $0df, $00, $0cf, $00, $00, $00, $0d7, $00
-	dc.b $0db, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0cf, $00, $0d7, $00
-	dc.b $0db, $00, $00, $00, $0e1, $00, $00, $00
-	dc.b $0df, $00, $0cf, $00, $00, $00, $0d7, $00
-	dc.b $0db, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $01
-musCh1	dc.b $0d9, $00, $00, $0e1, $00, $00, $0d7, $00
-	dc.b $00, $0d9, $00, $00, $0d1, $00, $00, $0d7
-	dc.b $00, $00, $0cb, $00, $00, $0c9, $00, $00
-	dc.b $0bb, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $00, $00, $00, $0e1, $00, $00, $0d7, $00
-	dc.b $00, $0d9, $00, $00, $0d1, $00, $00, $0d7
-	dc.b $00, $00, $0d9, $00, $00, $0dd, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
-	dc.b $0e4, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
-	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
-	dc.b $0d1, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
-	dc.b $0e4, $00, $00, $0dd, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
-	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
-	dc.b $0d1, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
-	dc.b $0e4, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
-	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
-	dc.b $0d1, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
-	dc.b $0e4, $00, $00, $0dd, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
-	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0d9, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $0d1, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $0d9, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $0d1, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0d1, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0d1, $00, $00, $0d1, $00, $00, $0e1, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0e1
-	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $00, $00, $00, $0d7, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
-	dc.b $0d7, $00, $00, $0d1, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0d1, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0d1, $00, $00, $0d1, $00, $00, $0e1, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0e1
-	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $00, $00, $00, $0d7, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
-	dc.b $0d7, $00, $00, $0d1, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0d1, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $0d1, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
-	dc.b $00, $0dd, $00, $00, $0dd, $00, $00, $0dd
-	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $0d1, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $0d1, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
-	dc.b $00, $0dd, $00, $00, $0dd, $00, $00, $0dd
-	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $0d9, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $0d1, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $0d9, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $0d1, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
-	dc.b $0d9, $00, $00, $0d9, $00, $00, $0d9, $00
-	dc.b $00, $00, $00, $00, $0d1, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d9, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $01
-Music_Play_block26500
 Music_Play
-	
-; // -------------------------------------------------------------------------------
-; // Music - A Stillness in the Rain - snd ch3, sp 3 (or 4)
-; // Music - Princess Mononoke Theme - snd ch2, sp 6 (5 or 4)
-; // Music - Mad World - ch1, sp 5
 	; Assigning single variable : musTime
 	inc musTime
 	
 ; //m2 := m2 + 1;
+	; Full binary clause
 	; Binary clause: GREATER
 	lda musTime
 	; Compare with pure num / var optimization
@@ -791,7 +808,6 @@ Music_Play_ConditionalTrueBlock15724
 	ldy #$0
 	lda (m1),y
 	
-	; Calling STOREVARIABLE
 	sta musTime
 	; Binary clause Simplified: EQUALS
 	; Compare with pure num / var optimization
@@ -812,7 +828,6 @@ Music_Play_ConditionalTrueBlock4664
 	ldy #$0
 	lda (m1),y
 	
-	; Calling STOREVARIABLE
 	sta musTime
 Music_Play_elseblock15141
 Music_Play_elsedoneblock7711
@@ -825,11 +840,9 @@ Music_Play_ConditionalTrueBlock27644
 	; Assigning memory location
 	; Assigning single variable : $900a
 	lda musTime
-	; Calling STOREVARIABLE
 	sta $900a
 	; Assigning single variable : musSustain
 	lda #0
-	; Calling STOREVARIABLE
 	sta musSustain
 Music_Play_elseblock32662
 Music_Play_elsedoneblock32757
@@ -866,10 +879,8 @@ Music_Play_ConditionalTrueBlock1842
 	; Assigning memory location
 	; Assigning single variable : $900a
 	lda #0
-	; Calling STOREVARIABLE
 	sta $900a
 	; Assigning single variable : musSustain
-	; Calling STOREVARIABLE
 	sta musSustain
 Music_Play_elseblock288
 Music_Play_elsedoneblock30106
@@ -887,14 +898,12 @@ Music_Play_rightvarAddSub_var6729 = $88
 	sec
 	sbc Music_Play_rightvarAddSub_var6729
 	
-	; Calling STOREVARIABLE
 	sta $900e
 	
 ; //musTime := m2[0];
 ; //SOUND3_REGISTER := musTime;
 	; Assigning single variable : musTime
 	lda #0
-	; Calling STOREVARIABLE
 	sta musTime
 	
 ; // next note	
@@ -929,7 +938,6 @@ vbl_Interrupt
 	; Assigning single variable : $900f
 	lda #15
 	
-	; Calling STOREVARIABLE
 	sta $900f
 	; Assigning single variable : ticks
 	; 8 bit binop
@@ -944,14 +952,12 @@ vbl_Interrupt
 	and #63
 	 ; end add / sub var with constant
 	
-	; Calling STOREVARIABLE
 	sta ticks
 	jsr Music_Play
 	; Assigning memory location
 	; Assigning single variable : $900f
 	lda #8
 	
-	; Calling STOREVARIABLE
 	sta $900f
 	; CloseIRQ
 	pla
@@ -1037,7 +1043,6 @@ Vbl_Init_elsedoneblock19629
 Level_Generate
 	; Assigning single variable : j
 	lda #0
-	; Calling STOREVARIABLE
 	sta j
 Level_Generate_for32439
 Level_Generate_forLoopFix6483
@@ -1064,13 +1069,11 @@ Level_Generate_forLoopFix6483
 Level_Generate_ConditionalTrueBlock10291
 	; Assigning single variable : k
 	lda #10
-	; Calling STOREVARIABLE
 	sta k
 Level_Generate_elseblock30836
 Level_Generate_elsedoneblock9374
 	; Assigning single variable : i
 	lda #0
-	; Calling STOREVARIABLE
 	sta i
 Level_Generate_for24021
 Level_Generate_forLoopFix31556
@@ -1086,6 +1089,7 @@ Level_Generate_forLoopFix31556
 	inc screenmemory+1
 Level_Generate_WordAdd11008
 	sta screenmemory+0
+	; Full binary clause
 	; Binary clause: GREATER
 	lda k
 	; Compare with pure num / var optimization
@@ -1129,12 +1133,10 @@ Level_Generate_ConditionalTrueBlock19589
 	asl
 	asl
 	
-	; Calling STOREVARIABLE
 	sta m
 	; Assigning single variable : p1
 	
 	; HandleVarBinopB16bit
-	ldy #0 ; ::HandleVarBinopB16bit 0
 	ldy #0 ; Fake 16 bit
 	lda m
 Level_Generate_rightvarInteger_var6038 = $88
@@ -1258,11 +1260,9 @@ block41
 ; //m2 := musCh1;
 	; Assigning single variable : musDelay
 	lda #5
-	; Calling STOREVARIABLE
 	sta musDelay
 	; Assigning single variable : musTime
 	lda #0
-	; Calling STOREVARIABLE
 	sta musTime
 	jsr Vbl_Init
 	
@@ -1289,37 +1289,110 @@ MainProgram_vbmCC_loop18190
 	; Assigning memory location
 	; Assigning single variable : $900e
 	lda #2
-	; Calling STOREVARIABLE
 	sta $900e
 	; Assigning memory location
 	; Assigning single variable : $900f
 	lda #8
 	
-	; Calling STOREVARIABLE
 	sta $900f
 	jsr Level_Generate
+	; Assigning single variable : p1
+	lda #<chrTest
+	ldx #>chrTest
+	sta p1
+	stx p1+1
+	; Assigning single variable : j
+	lda #0
+	sta j
+MainProgram_for29657
+	; ----------
+	; vbmSetColumn in ScreenMemory ZP - column offset
+	; column is complex
+	ldx j ; optimized, look out for bugs
+	lda vbmScrL,x   ; Address of table lo
+	ldy vbmScrH,x   ; Address of table hi
+	sta screenmemory   ; Set sceenmemory to start of column lo
+	sty screenmemory+1 ; Set sceenmemory to start of column hi
+	; Assigning single variable : i
+	lda #0
+	sta i
+MainProgram_for22646
+	ldy #$0
+	lda (p1),y
+	sta (screenmemory),y
+	iny
+	lda (p1),y
+	sta (screenmemory),y
+	iny
+	lda (p1),y
+	sta (screenmemory),y
+	iny
+	lda (p1),y
+	sta (screenmemory),y
+	iny
+	lda (p1),y
+	sta (screenmemory),y
+	iny
+	lda (p1),y
+	sta (screenmemory),y
+	iny
+	lda (p1),y
+	sta (screenmemory),y
+	iny
+	lda (p1),y
+	sta (screenmemory),y
+	; Assigning single variable : screenmemory
+	; WORD optimization: a=a+b
+	lda screenmemory+0
+	
+	clc
+	adc #8
+	bcc MainProgram_WordAdd20142
+	inc screenmemory+1
+MainProgram_WordAdd20142
+	sta screenmemory+0
+	; Assigning single variable : p1
+	; WORD optimization: a=a+b
+	lda p1+0
+	
+	clc
+	adc #8
+	bcc MainProgram_WordAdd23844
+	inc p1+1
+MainProgram_WordAdd23844
+	sta p1+0
+	inc i
+	lda #5
+	cmp i ;keep
+	bne MainProgram_for22646
+MainProgram_forLoopDone28433
+	inc j
+	lda #5
+	cmp j ;keep
+	bne MainProgram_for29657
+MainProgram_forLoopDone20055
 	; Assigning single variable : pd
 	lda #0
-	; Calling STOREVARIABLE
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_while29657
+MainProgram_while1416
+	; Full binary clause
 	; Binary clause: NOTEQUALS
 	lda #1
 	; Compare with pure num / var optimization
 	cmp #$0;keep
 	; BC done
-	beq MainProgram_binaryclausefailed20450
-MainProgram_binaryclausesuccess10466
+	beq MainProgram_binaryclausefailed9905
+MainProgram_binaryclausesuccess7391
 	lda #1; success
-	jmp MainProgram_binaryclausefinished11173
-MainProgram_binaryclausefailed20450
+	jmp MainProgram_binaryclausefinished17958
+MainProgram_binaryclausefailed9905
 	lda #0 ; failed state
-MainProgram_binaryclausefinished11173
+MainProgram_binaryclausefinished17958
 	cmp #1
-	beq MainProgram_ConditionalTrueBlock7958
-	jmp MainProgram_elsedoneblock19815
-MainProgram_ConditionalTrueBlock7958
+	beq MainProgram_ConditionalTrueBlock21881
+	jmp MainProgram_elsedoneblock10322
+MainProgram_ConditionalTrueBlock21881
 	; ----------
 	; vbmSetPosition2 x, y
 	; y is complex
@@ -1350,27 +1423,24 @@ MainProgram_ConditionalTrueBlock7958
 	; Assigning single variable : $900f
 	lda #8
 	
-	; Calling STOREVARIABLE
 	sta $900f
-MainProgram_while21659
+MainProgram_while3625
 	; Binary clause Simplified: EQUALS
 	lda ticks
 	; Compare with pure num / var optimization
 	cmp oldticks;keep
-	bne MainProgram_elsedoneblock17253
-MainProgram_ConditionalTrueBlock26292
-	jmp MainProgram_while21659
-MainProgram_elseblock26439
-MainProgram_elsedoneblock17253
+	bne MainProgram_elsedoneblock9314
+MainProgram_ConditionalTrueBlock26477
+	jmp MainProgram_while3625
+MainProgram_elseblock4414
+MainProgram_elsedoneblock9314
 	; Assigning single variable : oldticks
 	lda ticks
-	; Calling STOREVARIABLE
 	sta oldticks
 	; Assigning memory location
 	; Assigning single variable : $900f
 	lda #11
 	
-	; Calling STOREVARIABLE
 	sta $900f
 	; ----------
 	; vbmSetPosition2 x, y
@@ -1398,6 +1468,7 @@ MainProgram_elsedoneblock17253
 	lda (pb),y
 	sta $82+1
 	jsr vbmDrawSprite8E
+	; Full binary clause
 	; Binary clause: EQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
@@ -1408,72 +1479,68 @@ MainProgram_elsedoneblock17253
 	; Compare with pure num / var optimization
 	cmp #$0;keep
 	; BC done
-	bne MainProgram_binaryclausefailed13031
-MainProgram_binaryclausesuccess142
+	bne MainProgram_binaryclausefailed12550
+MainProgram_binaryclausesuccess13694
 	lda #1; success
-	jmp MainProgram_binaryclausefinished8492
-MainProgram_binaryclausefailed13031
+	jmp MainProgram_binaryclausefinished140
+MainProgram_binaryclausefailed12550
 	lda #0 ; failed state
-MainProgram_binaryclausefinished8492
+MainProgram_binaryclausefinished140
 	cmp #1
-	beq MainProgram_ConditionalTrueBlock4745
-	jmp MainProgram_elsedoneblock13186
-MainProgram_ConditionalTrueBlock4745
+	beq MainProgram_ConditionalTrueBlock24372
+	jmp MainProgram_elsedoneblock11833
+MainProgram_ConditionalTrueBlock24372
 	jsr callReadJoy1
 	; Binary clause Simplified: EQUALS
 	lda 197
 	
 	; Compare with pure num / var optimization
 	cmp #$c;keep
-	bne MainProgram_elsedoneblock19187
-MainProgram_ConditionalTrueBlock13064
+	bne MainProgram_elsedoneblock26576
+MainProgram_ConditionalTrueBlock28019
 	
 ; // force in keyboard
 	; Assigning single variable : joy1
 	lda #2
-	; Calling STOREVARIABLE
 	sta joy1
-MainProgram_elseblock7900
-MainProgram_elsedoneblock19187
-	; Binary clause Simplified: EQUALS
-	lda 197
-	
-	; Compare with pure num / var optimization
-	cmp #$24;keep
-	bne MainProgram_elsedoneblock235
-MainProgram_ConditionalTrueBlock14270
-	; Assigning single variable : joy1
-	lda #4
-	; Calling STOREVARIABLE
-	sta joy1
-MainProgram_elseblock29170
-MainProgram_elsedoneblock235
-	; Binary clause Simplified: EQUALS
-	lda 197
-	
-	; Compare with pure num / var optimization
-	cmp #$14;keep
-	bne MainProgram_elsedoneblock7285
-MainProgram_ConditionalTrueBlock18896
-	; Assigning single variable : joy1
-	lda #8
-	; Calling STOREVARIABLE
-	sta joy1
-MainProgram_elseblock4667
-MainProgram_elsedoneblock7285
+MainProgram_elseblock2125
+MainProgram_elsedoneblock26576
 	; Binary clause Simplified: EQUALS
 	lda 197
 	
 	; Compare with pure num / var optimization
 	cmp #$2c;keep
-	bne MainProgram_elsedoneblock28019
-MainProgram_ConditionalTrueBlock2695
+	bne MainProgram_elsedoneblock4678
+MainProgram_ConditionalTrueBlock17371
+	; Assigning single variable : joy1
+	lda #4
+	sta joy1
+MainProgram_elseblock22466
+MainProgram_elsedoneblock4678
+	; Binary clause Simplified: EQUALS
+	lda 197
+	
+	; Compare with pure num / var optimization
+	cmp #$14;keep
+	bne MainProgram_elsedoneblock21119
+MainProgram_ConditionalTrueBlock1018
+	; Assigning single variable : joy1
+	lda #8
+	sta joy1
+MainProgram_elseblock28464
+MainProgram_elsedoneblock21119
+	; Binary clause Simplified: EQUALS
+	lda 197
+	
+	; Compare with pure num / var optimization
+	cmp #$15;keep
+	bne MainProgram_elsedoneblock9010
+MainProgram_ConditionalTrueBlock31060
 	; Assigning single variable : joy1
 	lda #1
-	; Calling STOREVARIABLE
 	sta joy1
-MainProgram_elseblock21624
-MainProgram_elsedoneblock28019
+MainProgram_elseblock1926
+MainProgram_elsedoneblock9010
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
@@ -1483,8 +1550,8 @@ MainProgram_elsedoneblock28019
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock17371
-MainProgram_ConditionalTrueBlock22658
+	beq MainProgram_elsedoneblock12043
+MainProgram_ConditionalTrueBlock9576
 	; Assigning single variable : py
 	; Optimizer: a = a +/- b
 	lda py
@@ -1505,11 +1572,10 @@ MainProgram_ConditionalTrueBlock22658
 	adc #4
 	 ; end add / sub var with constant
 	
-	; Calling STOREVARIABLE
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock26302
-MainProgram_elsedoneblock17371
+MainProgram_elseblock30227
+MainProgram_elsedoneblock12043
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
@@ -1519,8 +1585,8 @@ MainProgram_elsedoneblock17371
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock1018
-MainProgram_ConditionalTrueBlock23851
+	beq MainProgram_elsedoneblock29565
+MainProgram_ConditionalTrueBlock7882
 	; Assigning single variable : py
 	; Optimizer: a = a +/- b
 	lda py
@@ -1541,11 +1607,10 @@ MainProgram_ConditionalTrueBlock23851
 	adc #4
 	 ; end add / sub var with constant
 	
-	; Calling STOREVARIABLE
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock25484
-MainProgram_elsedoneblock1018
+MainProgram_elseblock17086
+MainProgram_elsedoneblock29565
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
@@ -1555,8 +1620,8 @@ MainProgram_elsedoneblock1018
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock31060
-MainProgram_ConditionalTrueBlock2800
+	beq MainProgram_elsedoneblock5629
+MainProgram_ConditionalTrueBlock2625
 	; Assigning single variable : px
 	; Optimizer: a = a +/- b
 	lda px
@@ -1565,11 +1630,10 @@ MainProgram_ConditionalTrueBlock2800
 	sta px
 	; Assigning single variable : pd
 	lda #2
-	; Calling STOREVARIABLE
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock18087
-MainProgram_elsedoneblock31060
+MainProgram_elseblock25627
+MainProgram_elsedoneblock5629
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
@@ -1579,8 +1643,8 @@ MainProgram_elsedoneblock31060
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock9576
-MainProgram_ConditionalTrueBlock32170
+	beq MainProgram_elsedoneblock123
+MainProgram_ConditionalTrueBlock6902
 	; Assigning single variable : px
 	; Optimizer: a = a +/- b
 	lda px
@@ -1589,11 +1653,10 @@ MainProgram_ConditionalTrueBlock32170
 	sta px
 	; Assigning single variable : pd
 	lda #0
-	; Calling STOREVARIABLE
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock20315
-MainProgram_elsedoneblock9576
+MainProgram_elseblock14962
+MainProgram_elsedoneblock123
 	; Assigning single variable : cm
 	
 	; ----------
@@ -1616,36 +1679,39 @@ MainProgram_elsedoneblock9576
 	lsr
 	clc
 	adc $80
-	bcc MainProgram_dtnooverflow22758
+	bcc MainProgram_dtnooverflow13261
 	iny  ; overflow into high byte
-MainProgram_dtnooverflow22758
+MainProgram_dtnooverflow13261
 	
 	sta cm
 	sty cm+1
 	; Assigning single variable : cm
+	; Store Variable simplified optimization : right-hand term is pure
+	ldy #0 ; optimized, look out for bugs
 	lda #1
-	; Calling STOREVARIABLE
-	ldy #0
 	sta (cm),y
-MainProgram_elseblock20649
-MainProgram_elsedoneblock13186
-	jmp MainProgram_while29657
-MainProgram_elseblock6191
-MainProgram_elsedoneblock19815
+MainProgram_elseblock20159
+MainProgram_elsedoneblock11833
+	jmp MainProgram_while1416
+MainProgram_elseblock31998
+MainProgram_elsedoneblock10322
 EndSymbol
-EndBlock79
-	org $3e00
+EndBlock616
+	org $3a00
 sprRight
-	incbin "C:/Source/EnchantedForest///spr/sprRight.bin"
-	org $3e40
+	incbin "C:/src/EnchantedForest///spr/sprRight.bin"
+	org $3a40
 sprLeft
-	incbin "C:/Source/EnchantedForest///spr/sprLeft.bin"
-	org $3e80
+	incbin "C:/src/EnchantedForest///spr/sprLeft.bin"
+	org $3a80
 sprVert1
-	incbin "C:/Source/EnchantedForest///spr/sprVert1.bin"
-	org $3ec0
+	incbin "C:/src/EnchantedForest///spr/sprVert1.bin"
+	org $3ac0
 sprVert2
-	incbin "C:/Source/EnchantedForest///spr/sprVert2.bin"
-	org $3f00
+	incbin "C:/src/EnchantedForest///spr/sprVert2.bin"
+	org $3b00
 chrGfx
-	incbin "C:/Source/EnchantedForest///chr/graphics.bin"
+	incbin "C:/src/EnchantedForest///chr/graphics.bin"
+	org $3b50
+chrTest
+	incbin "C:/src/EnchantedForest///chr/test.bin"
