@@ -44,7 +44,7 @@ var
 	
 
 
-	const SUSTAINTIME: byte = 9;  // max length of time for musical note
+	const SUSTAINTIME: byte = 6;  // max length of time for musical note
 
 
 
