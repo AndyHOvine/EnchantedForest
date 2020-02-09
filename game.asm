@@ -1696,7 +1696,7 @@ MainProgram_elsedoneblock11833
 MainProgram_elseblock31998
 MainProgram_elsedoneblock10322
 EndSymbol
-EndBlock616
+EndBlock768
 	org $3a00
 sprRight
 	incbin "C:/src/EnchantedForest///spr/sprRight.bin"
@@ -1711,7 +1711,7 @@ sprVert2
 	incbin "C:/src/EnchantedForest///spr/sprVert2.bin"
 	org $3b00
 chrGfx
-	incbin "C:/src/EnchantedForest///chr/graphics.bin"
+	incbin "C:/src/EnchantedForest///chr/tiles.bin"
 	org $3b50
 chrTest
 	incbin "C:/src/EnchantedForest///chr/test.bin"

@@ -9,16 +9,16 @@
 	// Zero Page: 			$35 - $63
 
 	// game tick counter + 1 per FPS
-	ticks : byte at $35; 		// incremented 1 per frame
+	ticks : byte at $35; 			// incremented 1 per frame
 	oldticks : byte at $3d;
 
 	// player variables
-	px, py: byte at $3e;
-	pd: byte at $40;
+	px, py: byte at $3e;			// position
+	pd: byte at $40;				// direction
 	
-	i, j, k, m: byte at $41;
+	i, j, k, m: byte at $41;		// general counters
 
-	musTime : byte at $45;
+	musTime : byte at $45;			// music
 	musDelay : byte at $46;
 	musSustain : byte at $47;
 
@@ -48,8 +48,8 @@
 
 
 // forest graphics
-@vbmexport "chr/graphics.flf" "chr/graphics.bin" 0 9 1 0		// S E H M
-@vbmexportchunk "chr/font8x8.flf" "chr/test.bin" 120 5 5 0		// S W H M
+@vbmexport "chr/graphics.flf" "chr/tiles.bin" 86 95 1 0		// S E H M
+@vbmexportchunk "chr/graphics.flf" "chr/test.bin" 120 5 5 0		// S W H M
 
 
 // memory - load addresses
@@ -66,6 +66,6 @@
 	sprLeft:  incbin("spr/sprLeft.bin", aSprLeft);
 	sprVert1: incbin("spr/sprVert1.bin", aSprVert1);
 	sprVert2: incbin("spr/sprVert2.bin", aSprVert2);
-	chrGfx:   incbin("chr/graphics.bin", aChrGfx);
+	chrGfx:   incbin("chr/tiles.bin", aChrGfx);
 	chrTest:  incbin("chr/test.bin", aChrTest);
 	
