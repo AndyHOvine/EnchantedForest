@@ -744,12 +744,12 @@ initrandom256_RandomSkip6334
 ; // -------------------------------------------------------------------------------
 ; // Data
 ; // player sprites
-; // S E H M
-; // S E H M
-; // S E H M
-; // S E H M
+; // S W H M
+; // S W H M
+; // S W H M
+; // S W H M
 ; // forest graphics
-; // S E H M
+; // S W H M
 ; // S W H M
 ; // memory - load addresses
 ; // incbin data
@@ -1696,7 +1696,7 @@ MainProgram_elsedoneblock11833
 MainProgram_elseblock31998
 MainProgram_elsedoneblock10322
 EndSymbol
-EndBlock1376
+EndBlock1452
 	org $3a00
 sprRight
 	incbin "C:/src/EnchantedForest///spr/sprRight.bin"
