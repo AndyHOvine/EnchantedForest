@@ -1696,7 +1696,7 @@ MainProgram_elsedoneblock11833
 MainProgram_elseblock31998
 MainProgram_elsedoneblock10322
 EndSymbol
-EndBlock768
+EndBlock1376
 	org $3a00
 sprRight
 	incbin "C:/src/EnchantedForest///spr/sprRight.bin"

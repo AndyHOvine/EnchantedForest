@@ -41,14 +41,14 @@
 
 
 // player sprites
-@vbmexportchunk "spr/sprites.flf" "spr/sprRight.bin" 0 8 1 0		// S W H M
-@vbmexportchunk "spr/sprites.flf" "spr/sprLeft.bin" 40 8 1 0		// S W H M
-@vbmexportchunk "spr/sprites.flf" "spr/sprVert1.bin" 80 8 1 0		// S W H M
-@vbmexportchunk "spr/sprites.flf" "spr/sprVert2.bin" 120 8 1 0		// S W H M
+@vbmexport "spr/sprites.flf" "spr/sprRight.bin" 0 8 1 0			// S E H M
+@vbmexport "spr/sprites.flf" "spr/sprLeft.bin" 40 48 1 0		// S E H M
+@vbmexport "spr/sprites.flf" "spr/sprVert1.bin" 80 88 1 0		// S E H M
+@vbmexport "spr/sprites.flf" "spr/sprVert2.bin" 120 128 1 0		// S E H M
 
 
 // forest graphics
-@vbmexportchunk "chr/graphics.flf" "chr/tiles.bin" 86 9 1 0		// S W H M
+@vbmexport "chr/graphics.flf" "chr/tiles.bin" 86 95 1 0		// S E H M
 @vbmexportchunk "chr/graphics.flf" "chr/test.bin" 120 5 5 0		// S W H M
 
 

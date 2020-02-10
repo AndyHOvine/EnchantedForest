@@ -14,8 +14,8 @@ var
 
 // -------------------------------------------------------------------------------
 
-@include "constants.ras"			// GAME PARAMETERS and CONSTANTS
-@include "memory.ras"				// Include Resources and variables
+@include "_constants.ras"			// GAME PARAMETERS and CONSTANTS
+@include "_memory.ras"				// Include Resources and variables
 
 
 // -------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ var
 
 // -------------------------------------------------------------------------------
 // look up data
-@include "lookup.ras"
+@include "_lookup.ras"
 
 
 // -------------------------------------------------------------------------------
