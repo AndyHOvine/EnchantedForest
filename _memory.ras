@@ -1,0 +1,71 @@
+// -------------------------------------------------------------------------------
+// Variables:	(for assignable/changing data, use these addresses)
+
+
+	// Address of bitmap (screen and characters)
+	@userdata $1000 $1FFF "Bitmap"
+
+	// ------------------------------
+	// Zero Page: 			$35 - $63
+
+	// game tick counter + 1 per FPS
+	ticks : byte at $35; 			// incremented 1 per frame
+	oldticks : byte at $3d;
+
+	// player variables
+	px, py: byte at $3e;			// position
+	pd: byte at $40;				// direction
+	
+	i, j, k, m: byte at $41;		// general counters
+
+	musTime : byte at $45;			// music
+	musDelay : byte at $46;
+	musSustain : byte at $47;
+
+	// ------------------------------
+	// Cassette buffer:		$033C-$03FB (828-1019)
+
+
+
+	// ------------------------------	
+	// Working Zero Page pointers
+	p1			: pointer;			// general pointer
+	pa, pb		: pointer; 			// player sprite
+	cm, m1		: pointer;			// Music pointer
+
+
+
+
+// -------------------------------------------------------------------------------
+// Data
+
+
+// player sprites
+@vbmexportchunk "spr/sprites.flf" "spr/sprRight.bin" 0 8 1 0		// S W H M
+@vbmexportchunk "spr/sprites.flf" "spr/sprLeft.bin" 40 8 1 0		// S W H M
+@vbmexportchunk "spr/sprites.flf" "spr/sprVert1.bin" 80 8 1 0		// S W H M
+@vbmexportchunk "spr/sprites.flf" "spr/sprVert2.bin" 120 8 1 0		// S W H M
+
+
+// forest graphics
+@vbmexportchunk "chr/graphics.flf" "chr/tiles.bin" 86 9 1 0		// S W H M
+@vbmexportchunk "chr/graphics.flf" "chr/test.bin" 120 5 5 0		// S W H M
+
+
+// memory - load addresses
+	const aSprRight: address = $3a00;
+	const aSprLeft:  address = aSprRight + (sprHeight*8);
+	const aSprVert1: address = aSprLeft + (sprHeight*8);
+	const aSprVert2: address = aSprVert1 + (sprHeight*8);
+	const aChrGfx:   address = aSprVert2 + (sprHeight*8);
+	const aChrTest:	 address = aChrGfx + (10*8);
+
+
+// incbin data
+	sprRight: incbin("spr/sprRight.bin", aSprRight);
+	sprLeft:  incbin("spr/sprLeft.bin", aSprLeft);
+	sprVert1: incbin("spr/sprVert1.bin", aSprVert1);
+	sprVert2: incbin("spr/sprVert2.bin", aSprVert2);
+	chrGfx:   incbin("chr/tiles.bin", aChrGfx);
+	chrTest:  incbin("chr/test.bin", aChrTest);
+	

@@ -1,0 +1,31 @@
+	// I need to save some bytes, I don't use these
+	@ignoremethod "init16x8mul"
+	@ignoremethod "init16x8div"
+	@ignoremethod "init8x8div"
+	@ignoremethod "initeightbitmul"
+	@ignoremethod "initjoystick"
+	@ignoremethod "initmoveto"
+	
+
+
+// -------------------------------------------------------------------------------
+
+	// pre-shift sprite address offsets for 8x8 sprites
+	const sprHeight:byte = 8;
+	
+	// an 8x8 sprite needs 2 characters to move smoothly between them
+	// Enchanted Forest moves sprites 2 pixels at a time which requires
+	// four pre-shifted sprites of two characters each
+	
+	// side a (left)					side b (middle)	
+	const m0a:byte = $0;				const m0b:byte = sprHeight;
+	const m1a:byte = m0a+(sprHeight*2);	const m1b:byte = m0b+(sprHeight*2);
+	const m2a:byte = m1a+(sprHeight*2);	const m2b:byte = m1b+(sprHeight*2);
+	const m3a:byte = m2a+(sprHeight*2);	const m3b:byte = m2b+(sprHeight*2);	
+	
+
+
+	const SUSTAINTIME: byte = 6;  // max length of time for musical note
+
+
+

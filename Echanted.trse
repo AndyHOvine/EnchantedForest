@@ -1,4 +1,4 @@
-project_path = C:/Source/EnchantedForest/
+project_path = C:/src/EnchantedForest/
 zeropages = ,$64, $66, $68, $6A, $6C, $6E, $70, $72, $74, $76, $78, $7A
 temp_zeropages = ,$88, $8A, $8C, $8E
 zeropage_screenmemory = $fe
@@ -29,8 +29,8 @@ override_target_settings_org = $810
 override_target_settings_ignore_sys = 0
 override_target_settings_ignore_prg = 0
 output_debug_symbols = 1
-open_files = ,temp.flf, spr/sprites.flf, memory.ras, chr/font8x8.flf, game.ras
-current_file = game.ras
+open_files = ,_lookup.ras, _constants.ras, _memory.ras, game.ras
+current_file = _lookup.ras
 global_defines = ,
 dosbox_x86_system = default
 cpu_x86_system = 8086
