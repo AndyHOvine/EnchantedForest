@@ -141,7 +141,6 @@ begin
 		end;
 	end;
 
-
 	pd := 0;
 	Player_SetAnimation();
 
