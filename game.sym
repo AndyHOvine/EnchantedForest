@@ -130,5 +130,13 @@ al  $3a00 .sprRight
 al  $3a40 .sprLeft
 al  $3a80 .sprVert1
 al  $3ac0 .sprVert2
-al  $3b00 .chrGfx
+al  $3b00 .chrTiles
+al  $3b48 .chrTitle1
+al  $3c10 .chrTitle2
+al  $3cb0 .chrTitle3
+al  $3ce0 .chrTitle4
+al  $3d20 .chrTitle5
+al  $3d68 .chrTitle6
+al  $3e08 .chrTitle7
+al  $3e68 .chrTitle8
 ; breakpoints

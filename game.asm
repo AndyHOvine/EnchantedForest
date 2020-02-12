@@ -761,6 +761,7 @@ initrandom256_RandomSkip6334
 ; // S W H M
 ; // memory - load addresses
 ; // incbin data
+; // Title graphics
 ; // Include Resources and variables
 ; // -------------------------------------------------------------------------------
 ; // -------------------------------------------------------------------------------
@@ -1152,11 +1153,11 @@ Level_Generate_rightvarInteger_var6038 = $88
 	sta Level_Generate_rightvarInteger_var6038
 	sty Level_Generate_rightvarInteger_var6038+1
 	
-	lda #>chrGfx
+	lda #>chrTiles
 	clc
 	adc Level_Generate_rightvarInteger_var6038+1
 	tay
-	lda #<chrGfx
+	lda #<chrTiles
 	clc
 	adc Level_Generate_rightvarInteger_var6038
 	bcc Level_Generate_wordAdd12292
@@ -1630,7 +1631,7 @@ MainProgram_elsedoneblock13186
 MainProgram_elseblock6191
 MainProgram_elsedoneblock19815
 EndSymbol
-EndBlock161
+EndBlock1013
 	org $3a00
 sprRight
 	incbin "C:/src/EnchantedForest///spr/sprRight.bin"
@@ -1644,5 +1645,29 @@ sprVert1
 sprVert2
 	incbin "C:/src/EnchantedForest///spr/sprVert2.bin"
 	org $3b00
-chrGfx
+chrTiles
 	incbin "C:/src/EnchantedForest///chr/tiles.bin"
+	org $3b48
+chrTitle1
+	incbin "C:/src/EnchantedForest///chr/titles-1.bin"
+	org $3c10
+chrTitle2
+	incbin "C:/src/EnchantedForest///chr/titles-2.bin"
+	org $3cb0
+chrTitle3
+	incbin "C:/src/EnchantedForest///chr/titles-3.bin"
+	org $3ce0
+chrTitle4
+	incbin "C:/src/EnchantedForest///chr/titles-4.bin"
+	org $3d20
+chrTitle5
+	incbin "C:/src/EnchantedForest///chr/titles-5.bin"
+	org $3d68
+chrTitle6
+	incbin "C:/src/EnchantedForest///chr/titles-6.bin"
+	org $3e08
+chrTitle7
+	incbin "C:/src/EnchantedForest///chr/titles-7.bin"
+	org $3e68
+chrTitle8
+	incbin "C:/src/EnchantedForest///chr/titles-8.bin"

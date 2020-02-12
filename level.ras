@@ -17,7 +17,7 @@ begin
 			begin
 				k := k - 1;
 				m := ((random()&3)<<3);
-				p1 := chrGfx + m;
+				p1 := chrTiles + m;
 				vbmDrawTileO( p1 );
 			end;
 			

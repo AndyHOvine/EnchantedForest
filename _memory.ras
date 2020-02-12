@@ -3,24 +3,24 @@
 
 
 	// Address of bitmap (screen and characters)
-	@userdata $1000 $1FFF "Bitmap"
+	@userdata 		$1000 $1FFF "Bitmap"
 
 	// ------------------------------
 	// Zero Page: 			$35 - $63
 
 	// game tick counter + 1 per FPS
-	ticks : byte at $35; 			// incremented 1 per frame
-	oldticks : byte at $3d;
+	ticks : 		byte at $35;		// incremented 1 per frame
+	oldticks : 		byte at $3d;
 
 	// player variables
-	px, py: byte at $3e;			// position
-	pd: byte at $40;				// direction
+	px, py: 		byte at $3e;		// position
+	pd: 			byte at $40;		// direction
 	
-	i, j, k, m: byte at $41;		// general counters
+	i, j, k, m: 	byte at $41;		// general counters
 
-	musTime : byte at $45;			// music
-	musDelay : byte at $46;
-	musSustain : byte at $47;
+	musTime : 		byte at $45;		// music
+	musDelay : 		byte at $46;
+	musSustain : 	byte at $47;
 
 	// ------------------------------
 	// Cassette buffer:		$033C-$03FB (828-1019)
@@ -29,9 +29,9 @@
 
 	// ------------------------------	
 	// Working Zero Page pointers
-	p1			: pointer;			// general pointer
-	pa, pb		: pointer; 			// player sprite
-	cm, m1		: pointer;			// Music pointer
+	p1: 			pointer;			// general pointer
+	pa, pb:		 	pointer; 			// player sprite
+	cm, m1:			pointer;			// Music pointer
 
 
 
@@ -41,42 +41,58 @@
 
 
 // player sprites
-@vbmexportchunk "spr/sprites.flf" "spr/sprRight.bin" 0 8 1 0		// S W H M
-@vbmexportchunk "spr/sprites.flf" "spr/sprLeft.bin" 40 8 1 0		// S W H M
-@vbmexportchunk "spr/sprites.flf" "spr/sprVert1.bin" 80 8 1 0		// S W H M
-@vbmexportchunk "spr/sprites.flf" "spr/sprVert2.bin" 120 8 1 0		// S W H M
-
+@vbmexportchunk "spr/sprites.flf" "spr/sprRight.bin" 0  8 1  0		// S W H M
+@vbmexportchunk "spr/sprites.flf" "spr/sprLeft.bin" 40  8 1  0		// S W H M
+@vbmexportchunk "spr/sprites.flf" "spr/sprVert1.bin" 80  8 1  0	// S W H M
+@vbmexportchunk "spr/sprites.flf" "spr/sprVert2.bin" 120  8 1  0	// S W H M
 
 // forest graphics
-@vbmexportchunk "chr/graphics.flf" "chr/tiles.bin" 86 9 1 0		// S W H M
+@vbmexportchunk "chr/graphics.flf" "chr/tiles.bin" 86  9 1  0		// S W H M
 
 // Title screen graphics (split into parts)
-@vbmexportchunk "chr/titles.flf" "chr/titles-1.bin" 0 5 5 0		// S W H M
-@vbmexportchunk "chr/titles.flf" "chr/titles-2.bin" 5 4 5 0		// S W H M
-@vbmexportchunk "chr/titles.flf" "chr/titles-3.bin" 89 2 3 0		// S W H M
-@vbmexportchunk "chr/titles.flf" "chr/titles-4.bin" 51 2 4 0		// S W H M
-@vbmexportchunk "chr/titles.flf" "chr/titles-5.bin" 93 3 3 0		// S W H M
-@vbmexportchunk "chr/titles.flf" "chr/titles-6.bin" 16 4 5 0		// S W H M
-@vbmexportchunk "chr/titles.flf" "chr/titles-7.bin" 20 4 3 0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-1.bin" 0  5 5  0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-2.bin" 5  4 5  0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-3.bin" 89  2 3  0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-4.bin" 51  2 4  0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-5.bin" 93  3 3  0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-6.bin" 16  4 5  0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-7.bin" 20  4 3  0		// S W H M
 
 @vbmexportchunk "chr/titles.flf" "chr/titles-8.bin" 201 15 1 0		// S W H M
 
 
 
 // memory - load addresses
-	const aSprRight: address = $3a00;
-	const aSprLeft:  address = aSprRight + (sprHeight*8);
-	const aSprVert1: address = aSprLeft + (sprHeight*8);
-	const aSprVert2: address = aSprVert1 + (sprHeight*8);
-	const aChrGfx:   address = aSprVert2 + (sprHeight*8);
-	const aChrTest:	 address = aChrGfx + (10*8);
+	const aBaseData:	address = $3a00;
+
+	const aSprRight: 	address = aBaseData;
+	const aSprLeft:  	address = aSprRight + ( sprHeight*8 );
+	const aSprVert1: 	address = aSprLeft + ( sprHeight*8 );
+	const aSprVert2: 	address = aSprVert1 + ( sprHeight*8 );
+	const aChrTiles:	address = aSprVert2 + ( sprHeight*8 );
+	const aChrTitle1:	address = aChrTiles + ( 9*8 );
+	const aChrTitle2:	address = aChrTitle1 + ( 5*5*8 );
+	const aChrTitle3:	address = aChrTitle2 + ( 4*5*8 );
+	const aChrTitle4:	address = aChrTitle3 + ( 2*3*8 );
+	const aChrTitle5:	address = aChrTitle4 + ( 2*4*8 );
+	const aChrTitle6:	address = aChrTitle5 + ( 3*3*8 );
+	const aChrTitle7:	address = aChrTitle6 + ( 4*5*8 );
+	const aChrTitle8:	address = aChrTitle7 + ( 4*3*8 );
 
 
 // incbin data
-	sprRight: incbin("spr/sprRight.bin", aSprRight);
-	sprLeft:  incbin("spr/sprLeft.bin", aSprLeft);
-	sprVert1: incbin("spr/sprVert1.bin", aSprVert1);
-	sprVert2: incbin("spr/sprVert2.bin", aSprVert2);
-	chrGfx:   incbin("chr/tiles.bin", aChrGfx);
+	sprRight: 	incbin( "spr/sprRight.bin", aSprRight );
+	sprLeft:  	incbin( "spr/sprLeft.bin", aSprLeft );
+	sprVert1: 	incbin( "spr/sprVert1.bin", aSprVert1 );
+	sprVert2: 	incbin( "spr/sprVert2.bin", aSprVert2 );
+	chrTiles:   incbin( "chr/tiles.bin", aChrTiles );
 
-	
+// Title graphics
+	chrTitle1: 	incbin( "chr/titles-1.bin", aChrTitle1 );
+	chrTitle2: 	incbin( "chr/titles-2.bin", aChrTitle2 );
+	chrTitle3: 	incbin( "chr/titles-3.bin", aChrTitle3 );
+	chrTitle4: 	incbin( "chr/titles-4.bin", aChrTitle4 );
+	chrTitle5: 	incbin( "chr/titles-5.bin", aChrTitle5 );
+	chrTitle6: 	incbin( "chr/titles-6.bin", aChrTitle6 );
+	chrTitle7: 	incbin( "chr/titles-7.bin", aChrTitle7 );
+	chrTitle8: 	incbin( "chr/titles-8.bin", aChrTitle8 );
