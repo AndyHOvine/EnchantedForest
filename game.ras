@@ -6,6 +6,14 @@ program EnchantedForest;
 
 	This version created by Andy Hewitt - Hewco.uk
 
+	-------------------
+	
+	Dev Note:	Zero Page addresses have been defined in project settings
+				for the Vic 20 build.
+				
+				_memory 	- all variables and resources
+				_constants	- game constants & parameters
+				_lookup		- read only look up tables
 */
 var  
 
@@ -25,7 +33,7 @@ var
 
 // -------------------------------------------------------------------------------
 // look up data
-@include "_lookup.ras"
+@include "_lookup.ras"				// read only lookup tables
 
 
 // -------------------------------------------------------------------------------
@@ -58,19 +66,6 @@ begin
 
 
 	Level_Generate();
-
-	p1 := chrTest;
-	for j := 0 to 5 do
-	begin
-		vbmSetColumn( j );
-		for i := 0 to 5 do
-		begin
-			
-			vbmDrawTile( p1 );
-			screenmemory := screenmemory + 8;
-			p1 := p1 + 8;
-		end;
-	end;
 
 	pd := 0;
 	Player_SetAnimation();

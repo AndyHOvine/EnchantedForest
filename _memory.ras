@@ -49,7 +49,18 @@
 
 // forest graphics
 @vbmexportchunk "chr/graphics.flf" "chr/tiles.bin" 86 9 1 0		// S W H M
-@vbmexportchunk "chr/graphics.flf" "chr/test.bin" 120 5 5 0		// S W H M
+
+// Title screen graphics (split into parts)
+@vbmexportchunk "chr/titles.flf" "chr/titles-1.bin" 0 5 5 0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-2.bin" 5 4 5 0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-3.bin" 89 2 3 0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-4.bin" 51 2 4 0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-5.bin" 93 3 3 0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-6.bin" 16 4 5 0		// S W H M
+@vbmexportchunk "chr/titles.flf" "chr/titles-7.bin" 20 4 3 0		// S W H M
+
+@vbmexportchunk "chr/titles.flf" "chr/titles-8.bin" 201 15 1 0		// S W H M
+
 
 
 // memory - load addresses
@@ -67,5 +78,5 @@
 	sprVert1: incbin("spr/sprVert1.bin", aSprVert1);
 	sprVert2: incbin("spr/sprVert2.bin", aSprVert2);
 	chrGfx:   incbin("chr/tiles.bin", aChrGfx);
-	chrTest:  incbin("chr/test.bin", aChrTest);
+
 	

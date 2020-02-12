@@ -750,6 +750,14 @@ initrandom256_RandomSkip6334
 ; // S W H M
 ; // forest graphics
 ; // S W H M
+; // Title screen graphics (split into parts)
+; // S W H M
+; // S W H M
+; // S W H M
+; // S W H M
+; // S W H M
+; // S W H M
+; // S W H M
 ; // S W H M
 ; // memory - load addresses
 ; // incbin data
@@ -773,6 +781,7 @@ initrandom256_RandomSkip6334
 ; // Music - A Stillness in the Rain - snd ch3, sp 3 (or 4)
 ; // Music - Princess Mononoke Theme - snd ch2, sp 6 (5 or 4)
 ; // Music - Mad World - ch1, sp 5
+; // read only lookup tables
 ; // -------------------------------------------------------------------------------
 ; // source files
 	
@@ -1296,103 +1305,28 @@ MainProgram_vbmCC_loop18190
 	
 	sta $900f
 	jsr Level_Generate
-	; Assigning single variable : p1
-	lda #<chrTest
-	ldx #>chrTest
-	sta p1
-	stx p1+1
-	; Assigning single variable : j
-	lda #0
-	sta j
-MainProgram_for29657
-	; ----------
-	; vbmSetColumn in ScreenMemory ZP - column offset
-	; column is complex
-	ldx j ; optimized, look out for bugs
-	lda vbmScrL,x   ; Address of table lo
-	ldy vbmScrH,x   ; Address of table hi
-	sta screenmemory   ; Set sceenmemory to start of column lo
-	sty screenmemory+1 ; Set sceenmemory to start of column hi
-	; Assigning single variable : i
-	lda #0
-	sta i
-MainProgram_for22646
-	ldy #$0
-	lda (p1),y
-	sta (screenmemory),y
-	iny
-	lda (p1),y
-	sta (screenmemory),y
-	iny
-	lda (p1),y
-	sta (screenmemory),y
-	iny
-	lda (p1),y
-	sta (screenmemory),y
-	iny
-	lda (p1),y
-	sta (screenmemory),y
-	iny
-	lda (p1),y
-	sta (screenmemory),y
-	iny
-	lda (p1),y
-	sta (screenmemory),y
-	iny
-	lda (p1),y
-	sta (screenmemory),y
-	; Assigning single variable : screenmemory
-	; WORD optimization: a=a+b
-	lda screenmemory+0
-	
-	clc
-	adc #8
-	bcc MainProgram_WordAdd20142
-	inc screenmemory+1
-MainProgram_WordAdd20142
-	sta screenmemory+0
-	; Assigning single variable : p1
-	; WORD optimization: a=a+b
-	lda p1+0
-	
-	clc
-	adc #8
-	bcc MainProgram_WordAdd23844
-	inc p1+1
-MainProgram_WordAdd23844
-	sta p1+0
-	inc i
-	lda #5
-	cmp i ;keep
-	bne MainProgram_for22646
-MainProgram_forLoopDone28433
-	inc j
-	lda #5
-	cmp j ;keep
-	bne MainProgram_for29657
-MainProgram_forLoopDone20055
 	; Assigning single variable : pd
 	lda #0
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_while1416
+MainProgram_while29657
 	; Full binary clause
 	; Binary clause: NOTEQUALS
 	lda #1
 	; Compare with pure num / var optimization
 	cmp #$0;keep
 	; BC done
-	beq MainProgram_binaryclausefailed9905
-MainProgram_binaryclausesuccess7391
+	beq MainProgram_binaryclausefailed20450
+MainProgram_binaryclausesuccess10466
 	lda #1; success
-	jmp MainProgram_binaryclausefinished17958
-MainProgram_binaryclausefailed9905
+	jmp MainProgram_binaryclausefinished11173
+MainProgram_binaryclausefailed20450
 	lda #0 ; failed state
-MainProgram_binaryclausefinished17958
+MainProgram_binaryclausefinished11173
 	cmp #1
-	beq MainProgram_ConditionalTrueBlock21881
-	jmp MainProgram_elsedoneblock10322
-MainProgram_ConditionalTrueBlock21881
+	beq MainProgram_ConditionalTrueBlock7958
+	jmp MainProgram_elsedoneblock19815
+MainProgram_ConditionalTrueBlock7958
 	; ----------
 	; vbmSetPosition2 x, y
 	; y is complex
@@ -1424,16 +1358,16 @@ MainProgram_ConditionalTrueBlock21881
 	lda #8
 	
 	sta $900f
-MainProgram_while3625
+MainProgram_while21659
 	; Binary clause Simplified: EQUALS
 	lda ticks
 	; Compare with pure num / var optimization
 	cmp oldticks;keep
-	bne MainProgram_elsedoneblock9314
-MainProgram_ConditionalTrueBlock26477
-	jmp MainProgram_while3625
-MainProgram_elseblock4414
-MainProgram_elsedoneblock9314
+	bne MainProgram_elsedoneblock17253
+MainProgram_ConditionalTrueBlock26292
+	jmp MainProgram_while21659
+MainProgram_elseblock26439
+MainProgram_elsedoneblock17253
 	; Assigning single variable : oldticks
 	lda ticks
 	sta oldticks
@@ -1479,68 +1413,68 @@ MainProgram_elsedoneblock9314
 	; Compare with pure num / var optimization
 	cmp #$0;keep
 	; BC done
-	bne MainProgram_binaryclausefailed12550
-MainProgram_binaryclausesuccess13694
+	bne MainProgram_binaryclausefailed13031
+MainProgram_binaryclausesuccess142
 	lda #1; success
-	jmp MainProgram_binaryclausefinished140
-MainProgram_binaryclausefailed12550
+	jmp MainProgram_binaryclausefinished8492
+MainProgram_binaryclausefailed13031
 	lda #0 ; failed state
-MainProgram_binaryclausefinished140
+MainProgram_binaryclausefinished8492
 	cmp #1
-	beq MainProgram_ConditionalTrueBlock24372
-	jmp MainProgram_elsedoneblock11833
-MainProgram_ConditionalTrueBlock24372
+	beq MainProgram_ConditionalTrueBlock4745
+	jmp MainProgram_elsedoneblock13186
+MainProgram_ConditionalTrueBlock4745
 	jsr callReadJoy1
 	; Binary clause Simplified: EQUALS
 	lda 197
 	
 	; Compare with pure num / var optimization
 	cmp #$c;keep
-	bne MainProgram_elsedoneblock26576
-MainProgram_ConditionalTrueBlock28019
+	bne MainProgram_elsedoneblock19187
+MainProgram_ConditionalTrueBlock13064
 	
 ; // force in keyboard
 	; Assigning single variable : joy1
 	lda #2
 	sta joy1
-MainProgram_elseblock2125
-MainProgram_elsedoneblock26576
+MainProgram_elseblock7900
+MainProgram_elsedoneblock19187
 	; Binary clause Simplified: EQUALS
 	lda 197
 	
 	; Compare with pure num / var optimization
 	cmp #$2c;keep
-	bne MainProgram_elsedoneblock4678
-MainProgram_ConditionalTrueBlock17371
+	bne MainProgram_elsedoneblock235
+MainProgram_ConditionalTrueBlock14270
 	; Assigning single variable : joy1
 	lda #4
 	sta joy1
-MainProgram_elseblock22466
-MainProgram_elsedoneblock4678
+MainProgram_elseblock29170
+MainProgram_elsedoneblock235
 	; Binary clause Simplified: EQUALS
 	lda 197
 	
 	; Compare with pure num / var optimization
 	cmp #$14;keep
-	bne MainProgram_elsedoneblock21119
-MainProgram_ConditionalTrueBlock1018
+	bne MainProgram_elsedoneblock7285
+MainProgram_ConditionalTrueBlock18896
 	; Assigning single variable : joy1
 	lda #8
 	sta joy1
-MainProgram_elseblock28464
-MainProgram_elsedoneblock21119
+MainProgram_elseblock4667
+MainProgram_elsedoneblock7285
 	; Binary clause Simplified: EQUALS
 	lda 197
 	
 	; Compare with pure num / var optimization
 	cmp #$15;keep
-	bne MainProgram_elsedoneblock9010
-MainProgram_ConditionalTrueBlock31060
+	bne MainProgram_elsedoneblock28019
+MainProgram_ConditionalTrueBlock2695
 	; Assigning single variable : joy1
 	lda #1
 	sta joy1
-MainProgram_elseblock1926
-MainProgram_elsedoneblock9010
+MainProgram_elseblock21624
+MainProgram_elsedoneblock28019
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
@@ -1550,8 +1484,8 @@ MainProgram_elsedoneblock9010
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock12043
-MainProgram_ConditionalTrueBlock9576
+	beq MainProgram_elsedoneblock17371
+MainProgram_ConditionalTrueBlock22658
 	; Assigning single variable : py
 	; Optimizer: a = a +/- b
 	lda py
@@ -1574,8 +1508,8 @@ MainProgram_ConditionalTrueBlock9576
 	
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock30227
-MainProgram_elsedoneblock12043
+MainProgram_elseblock26302
+MainProgram_elsedoneblock17371
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
@@ -1585,8 +1519,8 @@ MainProgram_elsedoneblock12043
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock29565
-MainProgram_ConditionalTrueBlock7882
+	beq MainProgram_elsedoneblock1018
+MainProgram_ConditionalTrueBlock23851
 	; Assigning single variable : py
 	; Optimizer: a = a +/- b
 	lda py
@@ -1609,8 +1543,8 @@ MainProgram_ConditionalTrueBlock7882
 	
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock17086
-MainProgram_elsedoneblock29565
+MainProgram_elseblock25484
+MainProgram_elsedoneblock1018
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
@@ -1620,8 +1554,8 @@ MainProgram_elsedoneblock29565
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock5629
-MainProgram_ConditionalTrueBlock2625
+	beq MainProgram_elsedoneblock31060
+MainProgram_ConditionalTrueBlock2800
 	; Assigning single variable : px
 	; Optimizer: a = a +/- b
 	lda px
@@ -1632,8 +1566,8 @@ MainProgram_ConditionalTrueBlock2625
 	lda #2
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock25627
-MainProgram_elsedoneblock5629
+MainProgram_elseblock18087
+MainProgram_elsedoneblock31060
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
@@ -1643,8 +1577,8 @@ MainProgram_elsedoneblock5629
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock123
-MainProgram_ConditionalTrueBlock6902
+	beq MainProgram_elsedoneblock9576
+MainProgram_ConditionalTrueBlock32170
 	; Assigning single variable : px
 	; Optimizer: a = a +/- b
 	lda px
@@ -1655,8 +1589,8 @@ MainProgram_ConditionalTrueBlock6902
 	lda #0
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock14962
-MainProgram_elsedoneblock123
+MainProgram_elseblock20315
+MainProgram_elsedoneblock9576
 	; Assigning single variable : cm
 	
 	; ----------
@@ -1679,9 +1613,9 @@ MainProgram_elsedoneblock123
 	lsr
 	clc
 	adc $80
-	bcc MainProgram_dtnooverflow13261
+	bcc MainProgram_dtnooverflow22758
 	iny  ; overflow into high byte
-MainProgram_dtnooverflow13261
+MainProgram_dtnooverflow22758
 	
 	sta cm
 	sty cm+1
@@ -1690,13 +1624,13 @@ MainProgram_dtnooverflow13261
 	ldy #0 ; optimized, look out for bugs
 	lda #1
 	sta (cm),y
-MainProgram_elseblock20159
-MainProgram_elsedoneblock11833
-	jmp MainProgram_while1416
-MainProgram_elseblock31998
-MainProgram_elsedoneblock10322
+MainProgram_elseblock20649
+MainProgram_elsedoneblock13186
+	jmp MainProgram_while29657
+MainProgram_elseblock6191
+MainProgram_elsedoneblock19815
 EndSymbol
-EndBlock1452
+EndBlock161
 	org $3a00
 sprRight
 	incbin "C:/src/EnchantedForest///spr/sprRight.bin"
@@ -1712,6 +1646,3 @@ sprVert2
 	org $3b00
 chrGfx
 	incbin "C:/src/EnchantedForest///chr/tiles.bin"
-	org $3b50
-chrTest
-	incbin "C:/src/EnchantedForest///chr/test.bin"
