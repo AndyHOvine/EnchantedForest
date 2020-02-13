@@ -10,9 +10,9 @@ al  $2030 .sprVert2_A
 al  $2038 .sprVert2_B
 al  $2040 .sprDir
 al  $2052 .colmem
-al  $206a .musCh1b
-al  $21eb .musCh1x
-al  $23b4 .musCh1
+al  $206a .musCh1x
+al  $21eb .musCh1
+al  $23b4 .musCh1y
 al  $2895 .vbmSetDisplayMode
 al  $28b6 .vbmIsPal
 al  $28bf .vbmIsNtsc

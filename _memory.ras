@@ -88,11 +88,11 @@
 	chrTiles:   incbin( "chr/tiles.bin", aChrTiles );
 
 // Title graphics
-	chrTitle1: 	incbin( "chr/titles-1.bin", aChrTitle1 );
-	chrTitle2: 	incbin( "chr/titles-2.bin", aChrTitle2 );
-	chrTitle3: 	incbin( "chr/titles-3.bin", aChrTitle3 );
-	chrTitle4: 	incbin( "chr/titles-4.bin", aChrTitle4 );
-	chrTitle5: 	incbin( "chr/titles-5.bin", aChrTitle5 );
-	chrTitle6: 	incbin( "chr/titles-6.bin", aChrTitle6 );
-	chrTitle7: 	incbin( "chr/titles-7.bin", aChrTitle7 );
-	chrTitle8: 	incbin( "chr/titles-8.bin", aChrTitle8 );
+	chrTitle1: 	incbin( "chr/titles-1.bin", aChrTitle1 ); // large first char
+	chrTitle2: 	incbin( "chr/titles-2.bin", aChrTitle2 ); // large second char
+	chrTitle3: 	incbin( "chr/titles-3.bin", aChrTitle3 ); // small tree 1
+	chrTitle4: 	incbin( "chr/titles-4.bin", aChrTitle4 ); // tall tree 1
+	chrTitle5: 	incbin( "chr/titles-5.bin", aChrTitle5 ); // small tree 2
+	chrTitle6: 	incbin( "chr/titles-6.bin", aChrTitle6 ); // tall tree 2
+	chrTitle7: 	incbin( "chr/titles-7.bin", aChrTitle7 ); // wide tree
+	chrTitle8: 	incbin( "chr/titles-8.bin", aChrTitle8 ); // Title in English

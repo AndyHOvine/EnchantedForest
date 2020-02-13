@@ -38,7 +38,7 @@ sprDir	dc.w sprRight_A, sprRight_B, sprLeft_A, sprLeft_B, sprVert1_A, sprVert1_B
 	dc.w 
 colmem	dc.w $09400, $09414, $09428, $0943c, $09450, $09464, $09478, $0948c
 	dc.w $094a0, $094b4, $094c8, $094dc
-musCh1b	dc.b $0c3, $00, $00, $00, $00, $00, $0c9, $00
+musCh1x	dc.b $0c3, $00, $00, $00, $00, $00, $0c9, $00
 	dc.b $0c3, $00, $00, $00, $0bb, $00, $00, $00
 	dc.b $0af, $00, $00, $00, $097, $00, $00, $00
 	dc.b $0a3, $00, $00, $00, $00, $00, $0af, $00
@@ -87,7 +87,7 @@ musCh1b	dc.b $0c3, $00, $00, $00, $00, $00, $0c9, $00
 	dc.b $093, $00, $00, $00, $087, $00, $00, $00
 	dc.b $00, $00, $00, $00, $00, $00, $00, $00
 	dc.b $01
-musCh1x	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
+musCh1	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
 	dc.b $0cf, $00, $00, $00, $00, $00, $0cf, $00
 	dc.b $0d7, $00, $0c9, $00, $0c9, $00, $00, $00
 	dc.b $00, $00, $00, $00, $00, $00, $00, $00
@@ -145,7 +145,7 @@ musCh1x	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
 	dc.b $0db, $00, $00, $00, $00, $00, $00, $00
 	dc.b $00, $00, $00, $00, $00, $00, $00, $00
 	dc.b $01
-musCh1	dc.b $0d9, $00, $00, $0e1, $00, $00, $0d7, $00
+musCh1y	dc.b $0d9, $00, $00, $0e1, $00, $00, $0d7, $00
 	dc.b $00, $0d9, $00, $00, $0d1, $00, $00, $0d7
 	dc.b $00, $00, $0cb, $00, $00, $0c9, $00, $00
 	dc.b $0bb, $00, $00, $00, $00, $00, $00, $00
@@ -762,6 +762,14 @@ initrandom256_RandomSkip6334
 ; // memory - load addresses
 ; // incbin data
 ; // Title graphics
+; // large first char
+; // large second char
+; // small tree 1
+; // tall tree 1
+; // small tree 2
+; // tall tree 2
+; // wide tree
+; // Title in English
 ; // Include Resources and variables
 ; // -------------------------------------------------------------------------------
 ; // -------------------------------------------------------------------------------
@@ -1631,7 +1639,7 @@ MainProgram_elsedoneblock13186
 MainProgram_elseblock6191
 MainProgram_elsedoneblock19815
 EndSymbol
-EndBlock1013
+EndBlock175
 	org $3a00
 sprRight
 	incbin "C:/src/EnchantedForest///spr/sprRight.bin"
