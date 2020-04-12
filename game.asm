@@ -1,11 +1,15 @@
  processor 6502
-	ORG $1201
-	.byte    $0E, $08, $0A, $00, $9E, $20, $28
+	org $1200
+	; Starting new memory block at $1200
+	.byte    $0, $0E, $08, $0A, $00, $9E, $20, $28
 	.byte   $34,$36,$32,$34
 	.byte    $29, $00, $00, $00
-	ORG $1210
+	; Ending memory block
+EndBlock39
+	org $1210
+	; Starting new memory block at $1210
 EnchantedForest
-	jmp block41
+	jmp block1
 ticks = $35
 oldticks = $3d
 px = $3e
@@ -23,9 +27,8 @@ pa	= $66
 pb	= $68
 cm	= $6A
 m1	= $6C
- ; Temp vars section
- ; Temp vars section ends
 	org $2000
+	; Starting new memory block at $2000
 sprRight_A	dc.w $03a00, $03a10, $03a20, $03a30
 sprRight_B	dc.w $03a08, $03a18, $03a28, $03a38
 sprLeft_A	dc.w $03a40, $03a50, $03a60, $03a70
@@ -38,55 +41,6 @@ sprDir	dc.w sprRight_A, sprRight_B, sprLeft_A, sprLeft_B, sprVert1_A, sprVert1_B
 	dc.w 
 colmem	dc.w $09400, $09414, $09428, $0943c, $09450, $09464, $09478, $0948c
 	dc.w $094a0, $094b4, $094c8, $094dc
-musCh1x	dc.b $0c3, $00, $00, $00, $00, $00, $0c9, $00
-	dc.b $0c3, $00, $00, $00, $0bb, $00, $00, $00
-	dc.b $0af, $00, $00, $00, $097, $00, $00, $00
-	dc.b $0a3, $00, $00, $00, $00, $00, $0af, $00
-	dc.b $0a3, $00, $00, $00, $093, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $087, $00, $00, $00, $00, $00, $093, $00
-	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $0b3, $00, $0af, $00, $0a3, $00, $00, $00
-	dc.b $097, $00, $00, $00, $093, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $087, $00, $00, $00, $00, $00, $093, $00
-	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $0b3, $00, $00, $00, $00, $00, $0c3, $00
-	dc.b $0b3, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0a3, $00, $00, $00, $00, $00, $0b3, $00
-	dc.b $0a3, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $087, $00, $00, $00
-	dc.b $093, $00, $00, $00, $097, $00, $00, $00
-	dc.b $093, $00, $00, $00, $087, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0c3, $00, $00, $00, $00, $00, $0c9, $00
-	dc.b $0c3, $00, $00, $00, $0bb, $00, $00, $00
-	dc.b $0af, $00, $00, $00, $097, $00, $00, $00
-	dc.b $0a3, $00, $00, $00, $00, $00, $0af, $00
-	dc.b $0a3, $00, $00, $00, $093, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $087, $00, $00, $00, $00, $00, $093, $00
-	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $0b3, $00, $0af, $00, $0a3, $00, $00, $00
-	dc.b $097, $00, $00, $00, $093, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $087, $00, $00, $00, $00, $00, $093, $00
-	dc.b $097, $00, $0a3, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $0b3, $00, $00, $00, $00, $00, $0c3, $00
-	dc.b $0b3, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0a3, $0a3, $00, $00, $00, $00, $0b3, $00
-	dc.b $0a3, $00, $00, $00, $0af, $00, $00, $00
-	dc.b $097, $00, $00, $00, $087, $00, $00, $00
-	dc.b $093, $00, $00, $00, $097, $00, $00, $00
-	dc.b $093, $00, $00, $00, $087, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $01
 musCh1	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
 	dc.b $0cf, $00, $00, $00, $00, $00, $0cf, $00
 	dc.b $0d7, $00, $0c9, $00, $0c9, $00, $00, $00
@@ -145,163 +99,6 @@ musCh1	dc.b $0b7, $00, $0cf, $00, $0cf, $00, $0c9, $00
 	dc.b $0db, $00, $00, $00, $00, $00, $00, $00
 	dc.b $00, $00, $00, $00, $00, $00, $00, $00
 	dc.b $01
-musCh1y	dc.b $0d9, $00, $00, $0e1, $00, $00, $0d7, $00
-	dc.b $00, $0d9, $00, $00, $0d1, $00, $00, $0d7
-	dc.b $00, $00, $0cb, $00, $00, $0c9, $00, $00
-	dc.b $0bb, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $00, $00, $00, $0e1, $00, $00, $0d7, $00
-	dc.b $00, $0d9, $00, $00, $0d1, $00, $00, $0d7
-	dc.b $00, $00, $0d9, $00, $00, $0dd, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0d1, $00, $00, $0d1, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $00, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d7
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0d9
-	dc.b $00, $00, $0d7, $00, $00, $0d1, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d1, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
-	dc.b $0e4, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
-	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
-	dc.b $0d1, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
-	dc.b $0e4, $00, $00, $0dd, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
-	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
-	dc.b $0d1, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
-	dc.b $0e4, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
-	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
-	dc.b $0d1, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $0d1, $00, $00, $0d9, $00, $00, $0d9
-	dc.b $00, $00, $0e1, $00, $00, $0e1, $00, $00
-	dc.b $0e4, $00, $00, $0dd, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $0e4, $00, $00, $0e4
-	dc.b $00, $00, $0dd, $00, $00, $0dd, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0d9, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $0d1, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $0d9, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $0d1, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0d1, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0d1, $00, $00, $0d1, $00, $00, $0e1, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0e1
-	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $00, $00, $00, $0d7, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
-	dc.b $0d7, $00, $00, $0d1, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0d1, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0d1, $00, $00, $0d1, $00, $00, $0e1, $00
-	dc.b $00, $0e1, $00, $00, $00, $00, $00, $0e1
-	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $00, $00, $00, $0d7, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0dd, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
-	dc.b $0d7, $00, $00, $0d1, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $0d1, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $0d1, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
-	dc.b $00, $0dd, $00, $00, $0dd, $00, $00, $0dd
-	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $0d1, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
-	dc.b $00, $0dd, $00, $00, $00, $00, $00, $0dd
-	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $0d1, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
-	dc.b $00, $00, $0d9, $00, $00, $0d9, $00, $00
-	dc.b $0e1, $00, $00, $0e1, $00, $00, $0e4, $00
-	dc.b $00, $0dd, $00, $00, $0dd, $00, $00, $0dd
-	dc.b $00, $00, $0e4, $00, $00, $0e4, $00, $00
-	dc.b $0dd, $00, $00, $0dd, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $0d9, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $0d1, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $00, $00, $0d9, $00, $00, $00, $00, $00
-	dc.b $00, $00, $00, $0d1, $00, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $0d9, $00, $00
-	dc.b $0d9, $00, $00, $0d9, $00, $00, $0d9, $00
-	dc.b $00, $00, $00, $00, $0d1, $00, $00, $00
-	dc.b $00, $00, $00, $00, $00, $00, $0d9, $00
-	dc.b $00, $00, $00, $00, $00, $00, $00, $0d1
-	dc.b $00, $00, $00, $00, $00, $00, $00, $00
-	dc.b $01
 	
 	
 	; ***********  Defining procedure : initVbm
@@ -311,13 +108,13 @@ musCh1y	dc.b $0d9, $00, $00, $0e1, $00, $00, $0d7, $00
 	; Created by Andy H - Hewco.uk for use in Turbo Rascal
 	; See help to get started, all commmands begin with 'vbm'
 ; Screen address table Low byte / high byte
-vbmScrL = $0c ; 20 bytes
+vbmScrL = $0d ; 20 bytes
 ;    dc.b 0,0,0,0,0,0,0,0,0,0
 ;    dc.b 0,0,0,0,0,0,0,0,0,0
-vbmScrH = $20 ; 20 bytes
+vbmScrH = $21 ; 20 bytes
 ;    dc.b 0,0,0,0,0,0,0,0,0,0
 ;    dc.b 0,0,0,0,0,0,0,0,0,0
-; ends at $32
+; ends at $35
 vbm9000     = $00 ; store $9000 address value
 vbm9001     = $01 ; store $9001 address value
 vbm9005     = $02 ; store $9005 address value
@@ -327,9 +124,11 @@ vbmI        = $05 ; index
 vbmJ        = $06 ; index
 vbmT        = $07 ; index
 vbmScroll   = $08    ; 16 - character scroll start
-vbmNumColumns = $09  ; 20 -number of columns
+vbmNumColumns = $09  ; 20 - number of columns
 vbmScrLstart = $0a   ; $00 - start address for bitmap L
 vbmScrHstart = $0b   ; $11 - start address for bitmap H
+vbmScrHeight = $0c   ; 192 - default height of bitmap modes 0 and 1
+; vbmJ = temporarily set to number of dbl height characters per row - 12, 10 or 9
 vbmSetDisplayMode
     ; initialise
     lda #16 ; start char
@@ -354,28 +153,83 @@ vbmIsPal
     adc #2
     sta $9000
 vbmIsNtsc
-    lda #25		; (12x2) + 1
-    sta $9003	; set screen height to 12 double height chars
     lda vbmNumColumns ;#20
-    sta $9002	; set screen width to 20 characters
+    sta $9002	; set screen width to 20, 19, 18 or 17 characters
     cmp #20
     beq vbmSDM_noadjust
+    cmp #19
+    beq vbmSDM_19Cols
+    cmp #18
+    beq vbmSDM_18Cols
+vbmSDM_17Cols
+    lda $9000	; 17 column mode, move horiz position another 4 pixels right to centre
+    clc
+    adc #3      ; move 12 pixels across
+    sta $9000
+    jmp vbmSDM_noadjust
+vbmSDM_18Cols
+    lda $9000	; 18 column mode, move horiz position another 4 pixels right to centre
+    clc
+    adc #2      ; move 8 pixels across
+    sta $9000
+    jmp vbmSDM_noadjust
+vbmSDM_19Cols
     lda $9000	; 19 column mode, move horiz position another 4 pixels right to centre
     clc
-    adc #1
+    adc #1      ; move 4 pixels across
     sta $9000
 vbmSDM_noadjust
     lda $9001
     sta vbm9001
-    sec
-    sbc #1
+    ldy vbmScrHeight
+    cpy #192
+    beq vbmSDM_192Rows
+    cpy #176
+    beq vbmSDM_176Rows
+    cpy #160
+    beq vbmSDM_160Rows
+vbmSDM_144Rows
+    clc
+    adc #12      ; move down
     sta $9001	; adjust vertical position
+    lda #19		; (9x2) + 1
+    sta $9003	; set screen height to 12 double height chars
+    jmp vbmSDM_RowsDone
+vbmSDM_160Rows
+    clc
+    adc #8      ; move down
+    sta $9001	; adjust vertical position
+    lda #21		; (10x2) + 1
+    sta $9003	; set screen height to 12 double height chars
+    jmp vbmSDM_RowsDone
+vbmSDM_176Rows
+    clc
+    adc #4      ; move down
+    sta $9001	; adjust vertical position
+    lda #23		; (11x2) + 1
+    sta $9003	; set screen height to 12 double height chars
+    jmp vbmSDM_RowsDone
+vbmSDM_192Rows
+    sec
+    sbc #1      ; move up
+    sta $9001	; adjust vertical position
+    lda #25		; (12x2) + 1
+    sta $9003	; set screen height to 12 double height chars
+vbmSDM_RowsDone
     lda $9005
     sta vbm9005
     lda #%11001100	; 204 - set screen and character to $1000
     sta $9005
     jsr vbmLayoutCharacters
     jsr vbmCreateColumnAddresses
+    ; if using hidden column, set the logical width
+    lda vbmNumColumns
+    cmp #20
+    beq vbmSDM_Completed
+    cmp #18
+    beq vbmSDM_Completed
+    inc vbmNumColumns ; 1 hidden column
+vbmSDM_Completed
     rts
 ;; Write column start addresses
 vbmCreateColumnAddresses
@@ -384,20 +238,21 @@ vbmCreateColumnAddresses
     ldx #0
     lda vbmScrLstart    ; L start address of bitmap
     sta vbmScrL,x
-    ldy vbmScrHstart    ; H start address of bitmap
+    ldy vbmScrHstart    ; H start address of bitmap - Y reg to retain high byte
     tya
     sta vbmScrH,x
 vbmAddrTable2
     lda vbmScrL,x
     inx
     clc
-    adc #192 ; height of screen in pixels
+    adc vbmScrHeight    ; #192 ; height of screen in pixels
     bcc vbmNoOverflow2
     iny
 vbmNoOverflow2
     sta vbmScrL,x
     tya
     sta vbmScrH,x
+    ; Test high byte in Y reg
     cpy #$20             ; address needs to wrap back around?
     bne vbmAddrTable3
     ; reset address to start of memory VIC bitmap
@@ -407,7 +262,7 @@ vbmNoOverflow2
     tya
     sta vbmScrH,x
 vbmAddrTable3
-    cpx #19		; width in characters-1
+    cpx #19		; width in characters-1 ** note for smaller widths these are still calculated
     bcc vbmAddrTable2
     rts
 ;; Draw character map to screen to form bitmap layout
@@ -432,7 +287,7 @@ vbmYDrawForLoop
     ; add 20 for next row (or 19)
     lda screenmemory
     clc
-    adc vbmNumColumns ; 20
+    adc vbmNumColumns ; 20 (19, 18 or 17)
     sta screenmemory
     bcc vbmYDrawForLoopOverflow
     inc screenmemory+1
@@ -440,10 +295,10 @@ vbmYDrawForLoopOverflow
     inc vbmY
     inc vbmI    ; character
     bne vbmDrawForLoopResetChar
-    lda #16     ; reset character
+    lda #16     ; reset character back to #16
     sta vbmI
 vbmDrawForLoopResetChar
-    lda #12	; comapare 12 rows
+    lda vbmJ ; #12	; comapare 12 rows
     cmp vbmY ;keep
     bne vbmYDrawForLoop ; loop rows
     inc vbmX
@@ -459,8 +314,8 @@ vbmDrawForLoopResetChar
 	; VBM Clear bitmap routine
 vbmClear
 	; Address of bitmap $1100
-	lda #0
-	ldx #17
+        lda #$00 ; 0
+        ldx #$11 ; 17
 	sta screenmemory
 	stx screenmemory+1
 	sta vbmX
@@ -472,18 +327,18 @@ vbmClearForY
 	ldy vbmY
 	sta (screenmemory),y
 	inc vbmY
-	lda #192    ; reached end of row?
+        lda vbmScrHeight ; #192    ; reached end of row?
 	cmp vbmY ;keep
 	bne vbmClearForY
 	lda screenmemory
 	clc
-	adc #192
+        adc vbmScrHeight ; #192
 	bcc vbmClearXOverflow
 	inc screenmemory+1
 vbmClearXOverflow
 	sta screenmemory
 	inc vbmX
-	lda #20 ; reched end of column?
+        lda vbmNumColumns ; #20 ; reched end of column?
 	cmp vbmX ;keep
 	bne vbmClearForX
     ; bitmap has been cleared
@@ -533,7 +388,7 @@ vbmDrawSprite8E
 	; move screenmemory to next column
 	lda screenmemory
 	clc
-	adc #192 ; next column
+	adc vbmScrHeight ; #192 ; next column
 	bcc vbmDS8E_overflow
 	inc screenmemory+1
 vbmDS8E_overflow
@@ -656,8 +511,10 @@ A1_vic_raster:
   sta $912b
         ; 312*71-2 = $568
 timers_vic_raster:
-  lda #$56
-  ldx #$86
+;  lda #$56
+;  ldx #$86
+  lda $5B
+  ldx  $5C
   sta $9116     ; load the timer low byte latches
   sta $9126
   ldy #7        ; make a little delay to get the raster effect to the
@@ -673,9 +530,11 @@ timers_vic_raster:
   bne *-1
   stx $9115     ; start the reference timer
 pointers_vic_raster:
-  lda #00     ; set the raster IRQ routine pointer
+;  lda #00     ; set the raster IRQ routine pointer
+   lda  $5D
   sta $314
-  lda #00
+;  lda #00
+  lda  $5E
   sta $315
   lda #$c0
   sta $912e     ; enable Timer A underflow interrupts
@@ -698,9 +557,9 @@ pointers_vic_raster:
 VIC20_PORTACASS = $911F
 VIC20_PORTBVIA2 = $9120  ; Port B 6522 2 value (joystick)
 VIC20_PORTBVIA2d = $9122 ; Port B 6522 2 direction (joystick)
-joy1 .byte 0
-joy1last .byte 0
-joy1pressed .byte 0
+joy1 = $60
+joy1last = $61
+joy1pressed = $62
 callReadJoy1
 	LDA VIC20_PORTACASS
 	EOR #$FF
@@ -709,9 +568,9 @@ callReadJoy1
 	SEI
 	STX VIC20_PORTBVIA2d
 	LDY VIC20_PORTBVIA2
-	BMI initjoy1_JoySkip18467
+	BMI initjoy1_JoySkip2
 	ORA #$02
-initjoy1_JoySkip18467
+initjoy1_JoySkip2
 	LDX #$FF
 	STX VIC20_PORTBVIA2d
 	CLI
@@ -733,9 +592,9 @@ initjoy1_JoySkip18467
 Random
 	lda #$01
 	asl
-	bcc initrandom256_RandomSkip6334
+	bcc initrandom256_RandomSkip3
 	eor #$4d
-initrandom256_RandomSkip6334
+initrandom256_RandomSkip3
 	sta Random+1
 	eor $9124
 	rts
@@ -809,29 +668,30 @@ Music_Play
 	; Compare with pure num / var optimization
 	cmp musDelay;keep
 	; BC done
-	bcc Music_Play_binaryclausefailed28703
-	beq Music_Play_binaryclausefailed28703
-Music_Play_binaryclausesuccess31322
+	bcc Music_Play_binaryclausefailed41
+	beq Music_Play_binaryclausefailed41
+Music_Play_binaryclausesuccess43
 	lda #1; success
-	jmp Music_Play_binaryclausefinished23811
-Music_Play_binaryclausefailed28703
+	jmp Music_Play_binaryclausefinished42
+Music_Play_binaryclausefailed41
 	lda #0 ; failed state
-Music_Play_binaryclausefinished23811
+Music_Play_binaryclausefinished42
 	cmp #1
-	beq Music_Play_ConditionalTrueBlock15724
-	jmp Music_Play_elsedoneblock29358
-Music_Play_ConditionalTrueBlock15724
+	beq Music_Play_ConditionalTrueBlock6
+	jmp Music_Play_elsedoneblock8
+Music_Play_ConditionalTrueBlock6
 	; Assigning single variable : musTime
 	; Load pointer array
 	ldy #$0
 	lda (m1),y
 	
+	; Calling storevariable
 	sta musTime
 	; Binary clause Simplified: EQUALS
 	; Compare with pure num / var optimization
 	cmp #$1;keep
-	bne Music_Play_elsedoneblock7711
-Music_Play_ConditionalTrueBlock4664
+	bne Music_Play_elsedoneblock48
+Music_Play_ConditionalTrueBlock46
 	
 ; // reached end - restart music after intro part
 	; Assigning single variable : m1
@@ -846,43 +706,46 @@ Music_Play_ConditionalTrueBlock4664
 	ldy #$0
 	lda (m1),y
 	
+	; Calling storevariable
 	sta musTime
-Music_Play_elseblock15141
-Music_Play_elsedoneblock7711
+Music_Play_elseblock47
+Music_Play_elsedoneblock48
 	; Binary clause Simplified: NOTEQUALS
 	lda musTime
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq Music_Play_elsedoneblock32757
-Music_Play_ConditionalTrueBlock27644
+	beq Music_Play_elsedoneblock54
+Music_Play_ConditionalTrueBlock52
 	; Assigning memory location
 	; Assigning single variable : $900a
 	lda musTime
+	; Calling storevariable
 	sta $900a
 	; Assigning single variable : musSustain
-	lda #0
+	lda #$0
+	; Calling storevariable
 	sta musSustain
-Music_Play_elseblock32662
-Music_Play_elsedoneblock32757
+Music_Play_elseblock53
+Music_Play_elsedoneblock54
 	; Binary clause Simplified: EQUALS
 	lda musTime
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	bne Music_Play_elsedoneblock778
-Music_Play_ConditionalTrueBlock9741
+	bne Music_Play_elsedoneblock60
+Music_Play_ConditionalTrueBlock58
 	; Assigning single variable : musSustain
 	inc musSustain
-Music_Play_elseblock27529
-Music_Play_elsedoneblock778
+Music_Play_elseblock59
+Music_Play_elsedoneblock60
 	; Binary clause: EQUALS
 	lda musSustain
 	; Compare with pure num / var optimization
 	cmp #$6;keep
 	; BC done
-	bne Music_Play_tempfail8942
-Music_Play_binaryclausesuccess22648
-	jmp Music_Play_ConditionalTrueBlock1842
-Music_Play_tempfail8942
+	bne Music_Play_tempfail68
+Music_Play_binaryclausesuccess70
+	jmp Music_Play_ConditionalTrueBlock64
+Music_Play_tempfail68
 	; Binary clause: NOTEQUALS
 	; Load pointer array
 	ldy #$1
@@ -891,17 +754,19 @@ Music_Play_tempfail8942
 	; Compare with pure num / var optimization
 	cmp #$0;keep
 	; BC done
-	beq Music_Play_elseblock288
-Music_Play_binaryclausesuccess23805
-Music_Play_ConditionalTrueBlock1842
+	beq Music_Play_elseblock65
+Music_Play_binaryclausesuccess72
+Music_Play_ConditionalTrueBlock64
 	; Assigning memory location
 	; Assigning single variable : $900a
-	lda #0
+	lda #$0
+	; Calling storevariable
 	sta $900a
 	; Assigning single variable : musSustain
+	; Calling storevariable
 	sta musSustain
-Music_Play_elseblock288
-Music_Play_elsedoneblock30106
+Music_Play_elseblock65
+Music_Play_elsedoneblock66
 	; Assigning memory location
 	; Assigning single variable : $900e
 	; 8 bit binop
@@ -910,33 +775,35 @@ Music_Play_elsedoneblock30106
 	lsr
 	lsr
 	
-Music_Play_rightvarAddSub_var6729 = $88
-	sta Music_Play_rightvarAddSub_var6729
-	lda #3
+Music_Play_rightvarAddSub_var74 = $88
+	sta Music_Play_rightvarAddSub_var74
+	lda #$3
 	sec
-	sbc Music_Play_rightvarAddSub_var6729
+	sbc Music_Play_rightvarAddSub_var74
 	
+	; Calling storevariable
 	sta $900e
 	
 ; //musTime := m2[0];
 ; //SOUND3_REGISTER := musTime;
 	; Assigning single variable : musTime
-	lda #0
+	lda #$0
+	; Calling storevariable
 	sta musTime
 	
 ; // next note	
 	; Assigning single variable : m1
 	; WORD optimization: a=a+b
-	lda m1+0
+	lda m1
 	
 	clc
-	adc #1
-	bcc Music_Play_WordAdd24370
+	adc #$1
+	bcc Music_Play_WordAdd75
 	inc m1+1
-Music_Play_WordAdd24370
+Music_Play_WordAdd75
 	sta m1+0
-Music_Play_elseblock11478
-Music_Play_elsedoneblock29358
+Music_Play_elseblock7
+Music_Play_elsedoneblock8
 	rts
 	
 ; // Vertical Blank Interrupt
@@ -956,6 +823,7 @@ vbl_Interrupt
 	; Assigning single variable : $900f
 	lda #15
 	
+	; Calling storevariable
 	sta $900f
 	; Assigning single variable : ticks
 	; 8 bit binop
@@ -964,18 +832,20 @@ vbl_Interrupt
 	; Add/sub where right value is constant number
 	lda ticks
 	clc
-	adc #1
+	adc #$1
 	 ; end add / sub var with constant
 	
-	and #63
+	and #$3f
 	 ; end add / sub var with constant
 	
+	; Calling storevariable
 	sta ticks
 	jsr Music_Play
 	; Assigning memory location
 	; Assigning single variable : $900f
 	lda #8
 	
+	; Calling storevariable
 	sta $900f
 	; CloseIRQ
 	pla
@@ -1000,58 +870,58 @@ Vbl_Init
 	lda $9000
 	; Compare with pure num / var optimization
 	cmp #$c;keep
-	bne Vbl_Init_elseblock3548
-Vbl_Init_ConditionalTrueBlock24393
+	bne Vbl_Init_elseblock80
+Vbl_Init_ConditionalTrueBlock79
 	
 ; // Time the interrupt directly with the raster (PAL);
 ; // 312 scanlines * 71 cycles -2 = $5686
 ; //VIAIRQ(vbl(), $86, $56);
 	lda #<vbl_Interrupt
-	sta pointers_vic_raster+1
+	sta  $5D
 	lda #>vbl_Interrupt
-	sta pointers_vic_raster+6
-	ldx #121 ; optimized, look out for bugs
-	lda #0
-	bne Vbl_Init_viarasterirq_ntsc_timing11840
+	sta  $5E
+	ldx #$79 ; optimized, look out for bugs
+	lda #$0
+	bne Vbl_Init_viarasterirq_ntsc_timing86
 	lda #$86
-	sta timers_vic_raster+1
+	sta $5B
 	lda #$56
-	sta timers_vic_raster+3
+	sta  $5C
 	jsr A0_vic_raster
-	jmp Vbl_Init_viarasterirq_end4966
-Vbl_Init_viarasterirq_ntsc_timing11840
+	jmp Vbl_Init_viarasterirq_end87
+Vbl_Init_viarasterirq_ntsc_timing86
 	lda #$43
-	sta timers_vic_raster+1
+	sta $5B
 	lda #$42
-	sta timers_vic_raster+3
+	sta  $5C
 	jsr A0_vic_raster
-Vbl_Init_viarasterirq_end4966
-	jmp Vbl_Init_elsedoneblock19629
-Vbl_Init_elseblock3548
+Vbl_Init_viarasterirq_end87
+	jmp Vbl_Init_elsedoneblock81
+Vbl_Init_elseblock80
 	
 ; // Time the interrupt directly with the raster (NTSC);
 ; //VIAIRQ(vbl(), $43, $42);
 	lda #<vbl_Interrupt
-	sta pointers_vic_raster+1
+	sta  $5D
 	lda #>vbl_Interrupt
-	sta pointers_vic_raster+6
-	ldx #107 ; optimized, look out for bugs
-	lda #1
-	bne Vbl_Init_viarasterirq_ntsc_timing13931
+	sta  $5E
+	ldx #$6b ; optimized, look out for bugs
+	lda #$1
+	bne Vbl_Init_viarasterirq_ntsc_timing89
 	lda #$86
-	sta timers_vic_raster+1
+	sta $5B
 	lda #$56
-	sta timers_vic_raster+3
+	sta  $5C
 	jsr A0_vic_raster
-	jmp Vbl_Init_viarasterirq_end26308
-Vbl_Init_viarasterirq_ntsc_timing13931
+	jmp Vbl_Init_viarasterirq_end90
+Vbl_Init_viarasterirq_ntsc_timing89
 	lda #$43
-	sta timers_vic_raster+1
+	sta $5B
 	lda #$42
-	sta timers_vic_raster+3
+	sta  $5C
 	jsr A0_vic_raster
-Vbl_Init_viarasterirq_end26308
-Vbl_Init_elsedoneblock19629
+Vbl_Init_viarasterirq_end90
+Vbl_Init_elsedoneblock81
 	rts
 	
 	
@@ -1060,10 +930,11 @@ Vbl_Init_elsedoneblock19629
 	
 Level_Generate
 	; Assigning single variable : j
-	lda #0
+	lda #$0
+	; Calling storevariable
 	sta j
-Level_Generate_for32439
-Level_Generate_forLoopFix6483
+Level_Generate_for92
+Level_Generate_forLoopFix166
 	
 ; // X position
 	; ----------
@@ -1078,34 +949,36 @@ Level_Generate_forLoopFix6483
 	; 8 bit binop
 	; Add/sub where right value is constant number
 	lda j
-	and #2
+	and #$2
 	 ; end add / sub var with constant
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	bne Level_Generate_elsedoneblock9374
-Level_Generate_ConditionalTrueBlock10291
+	bne Level_Generate_elsedoneblock173
+Level_Generate_ConditionalTrueBlock171
 	; Assigning single variable : k
-	lda #10
+	lda #$a
+	; Calling storevariable
 	sta k
-Level_Generate_elseblock30836
-Level_Generate_elsedoneblock9374
+Level_Generate_elseblock172
+Level_Generate_elsedoneblock173
 	; Assigning single variable : i
-	lda #0
+	lda #$0
+	; Calling storevariable
 	sta i
-Level_Generate_for24021
-Level_Generate_forLoopFix31556
+Level_Generate_for176
+Level_Generate_forLoopFix208
 	
 ; // Y position
 	; Assigning single variable : screenmemory
 	; WORD optimization: a=a+b
-	lda screenmemory+0
+	lda screenmemory
 	
 	clc
-	adc #8
-	bcc Level_Generate_WordAdd11008
+	adc #$8
+	bcc Level_Generate_WordAdd212
 	inc screenmemory+1
-Level_Generate_WordAdd11008
+Level_Generate_WordAdd212
 	sta screenmemory+0
 	; Full binary clause
 	; Binary clause: GREATER
@@ -1113,30 +986,30 @@ Level_Generate_WordAdd11008
 	; Compare with pure num / var optimization
 	cmp #$0;keep
 	; BC done
-	bcc Level_Generate_binaryclausefailed6618
-	beq Level_Generate_binaryclausefailed6618
-Level_Generate_binaryclausesuccess19796
+	bcc Level_Generate_binaryclausefailed228
+	beq Level_Generate_binaryclausefailed228
+Level_Generate_binaryclausesuccess230
 	lda #1; success
-	jmp Level_Generate_binaryclausefinished20580
-Level_Generate_binaryclausefailed6618
+	jmp Level_Generate_binaryclausefinished229
+Level_Generate_binaryclausefailed228
 	lda #0 ; failed state
-Level_Generate_binaryclausefinished20580
+Level_Generate_binaryclausefinished229
 	cmp #1
-	beq Level_Generate_ConditionalTrueBlock32609
-	jmp Level_Generate_elsedoneblock32702
-Level_Generate_ConditionalTrueBlock32609
+	beq Level_Generate_ConditionalTrueBlock214
+	jmp Level_Generate_elsedoneblock216
+Level_Generate_ConditionalTrueBlock214
 	; Binary clause Simplified: EQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
 	jsr Random
 	
-	and #3
+	and #$3
 	 ; end add / sub var with constant
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	bne Level_Generate_elsedoneblock28009
-Level_Generate_ConditionalTrueBlock19589
+	bne Level_Generate_elsedoneblock235
+Level_Generate_ConditionalTrueBlock233
 	; Assigning single variable : k
 	dec k
 	; Assigning single variable : m
@@ -1144,33 +1017,34 @@ Level_Generate_ConditionalTrueBlock19589
 	; Add/sub where right value is constant number
 	jsr Random
 	
-	and #3
+	and #$3
 	 ; end add / sub var with constant
 	
 	asl
 	asl
 	asl
 	
+	; Calling storevariable
 	sta m
 	; Assigning single variable : p1
 	
 	; HandleVarBinopB16bit
 	ldy #0 ; Fake 16 bit
 	lda m
-Level_Generate_rightvarInteger_var6038 = $88
-	sta Level_Generate_rightvarInteger_var6038
-	sty Level_Generate_rightvarInteger_var6038+1
+Level_Generate_rightvarInteger_var241 = $88
+	sta Level_Generate_rightvarInteger_var241
+	sty Level_Generate_rightvarInteger_var241+1
 	
 	lda #>chrTiles
 	clc
-	adc Level_Generate_rightvarInteger_var6038+1
+	adc Level_Generate_rightvarInteger_var241+1
 	tay
 	lda #<chrTiles
 	clc
-	adc Level_Generate_rightvarInteger_var6038
-	bcc Level_Generate_wordAdd12292
+	adc Level_Generate_rightvarInteger_var241
+	bcc Level_Generate_wordAdd240
 	iny
-Level_Generate_wordAdd12292
+Level_Generate_wordAdd240
 	
 	sta p1
 	sty p1+1
@@ -1206,24 +1080,24 @@ Level_Generate_wordAdd12292
 	lda (p1),y
 	ora (screenmemory),y
 	sta (screenmemory),y
-Level_Generate_elseblock20798
-Level_Generate_elsedoneblock28009
-Level_Generate_elseblock14989
-Level_Generate_elsedoneblock32702
+Level_Generate_elseblock234
+Level_Generate_elsedoneblock235
+Level_Generate_elseblock215
+Level_Generate_elsedoneblock216
 	inc i
-	lda #23
+	lda #$17
 	cmp i ;keep
-	beq Level_Generate_forLoopDone22798
-Level_Generate_forLoopNotDone30303
-	jmp Level_Generate_for24021
-Level_Generate_forLoopDone22798
+	beq Level_Generate_forLoopDone209
+Level_Generate_forLoopNotDone210
+	jmp Level_Generate_for176
+Level_Generate_forLoopDone209
 	inc j
-	lda #20
+	lda #$14
 	cmp j ;keep
-	beq Level_Generate_forLoopDone27595
-Level_Generate_forLoopNotDone4041
-	jmp Level_Generate_for32439
-Level_Generate_forLoopDone27595
+	beq Level_Generate_forLoopDone167
+Level_Generate_forLoopNotDone168
+	jmp Level_Generate_for92
+Level_Generate_forLoopDone167
 	rts
 	
 ; // Set the animation pointers for the Player
@@ -1236,8 +1110,7 @@ Player_SetAnimation
 	; Assigning single variable : pa
 	
 	; Load Integer array
-	ldx pd
-	txa   ; watch for bug, Integer array has index range of 0 to 127
+	lda pd
 	asl
 	tax
 	lda sprDir,x
@@ -1253,7 +1126,7 @@ Player_SetAnimation
 	; Add/sub where right value is constant number
 	lda pd
 	clc
-	adc #1
+	adc #$1
 	 ; end add / sub var with constant
 	
 	asl
@@ -1265,7 +1138,7 @@ Player_SetAnimation
 	sta pb
 	sty pb+1
 	rts
-block41
+block1
 	
 ; // -------------------------------------------------------------------------------
 ; // **** MAIN PROGRAM ****
@@ -1277,18 +1150,24 @@ block41
 	
 ; //m2 := musCh1;
 	; Assigning single variable : musDelay
-	lda #5
+	lda #$5
+	; Calling storevariable
 	sta musDelay
 	; Assigning single variable : musTime
-	lda #0
+	lda #$0
+	; Calling storevariable
 	sta musTime
 	jsr Vbl_Init
 	
 ; // call before set display mode
 screenmemory =  $fe
 	; Set special display mode for VBM bitmap graphics
-	lda #20
+	lda #20 ; screen width in chars
 	sta vbmNumColumns
+	lda #192 ; screen height in pixels
+	sta vbmScrHeight
+	lda #12 ; screen height in chars
+	sta vbmJ
 	jsr vbmSetDisplayMode
 	; Clear VBM bitmap
 	lda #0
@@ -1300,42 +1179,45 @@ screenmemory =  $fe
 	sta screenmemory
 	lda #5
 	ldy #241 ; colour mem to clear (stops at zero so +1)
-MainProgram_vbmCC_loop18190
+MainProgram_vbmCC_loop243
 	sta (screenmemory),y
 	dey
-	bne MainProgram_vbmCC_loop18190
+	bne MainProgram_vbmCC_loop243
 	; Assigning memory location
 	; Assigning single variable : $900e
-	lda #2
+	lda #$2
+	; Calling storevariable
 	sta $900e
 	; Assigning memory location
 	; Assigning single variable : $900f
 	lda #8
 	
+	; Calling storevariable
 	sta $900f
 	jsr Level_Generate
 	; Assigning single variable : pd
-	lda #0
+	lda #$0
+	; Calling storevariable
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_while29657
+MainProgram_while244
 	; Full binary clause
 	; Binary clause: NOTEQUALS
-	lda #1
+	lda #$1
 	; Compare with pure num / var optimization
 	cmp #$0;keep
 	; BC done
-	beq MainProgram_binaryclausefailed20450
-MainProgram_binaryclausesuccess10466
+	beq MainProgram_binaryclausefailed362
+MainProgram_binaryclausesuccess364
 	lda #1; success
-	jmp MainProgram_binaryclausefinished11173
-MainProgram_binaryclausefailed20450
+	jmp MainProgram_binaryclausefinished363
+MainProgram_binaryclausefailed362
 	lda #0 ; failed state
-MainProgram_binaryclausefinished11173
+MainProgram_binaryclausefinished363
 	cmp #1
-	beq MainProgram_ConditionalTrueBlock7958
-	jmp MainProgram_elsedoneblock19815
-MainProgram_ConditionalTrueBlock7958
+	beq MainProgram_ConditionalTrueBlock245
+	jmp MainProgram_elsedoneblock247
+MainProgram_ConditionalTrueBlock245
 	; ----------
 	; vbmSetPosition2 x, y
 	; y is complex
@@ -1366,24 +1248,27 @@ MainProgram_ConditionalTrueBlock7958
 	; Assigning single variable : $900f
 	lda #8
 	
+	; Calling storevariable
 	sta $900f
-MainProgram_while21659
+MainProgram_while366
 	; Binary clause Simplified: EQUALS
 	lda ticks
 	; Compare with pure num / var optimization
 	cmp oldticks;keep
-	bne MainProgram_elsedoneblock17253
-MainProgram_ConditionalTrueBlock26292
-	jmp MainProgram_while21659
-MainProgram_elseblock26439
-MainProgram_elsedoneblock17253
+	bne MainProgram_elsedoneblock369
+MainProgram_ConditionalTrueBlock367
+	jmp MainProgram_while366
+MainProgram_elseblock368
+MainProgram_elsedoneblock369
 	; Assigning single variable : oldticks
 	lda ticks
+	; Calling storevariable
 	sta oldticks
 	; Assigning memory location
 	; Assigning single variable : $900f
 	lda #11
 	
+	; Calling storevariable
 	sta $900f
 	; ----------
 	; vbmSetPosition2 x, y
@@ -1416,190 +1301,198 @@ MainProgram_elsedoneblock17253
 	; 8 bit binop
 	; Add/sub where right value is constant number
 	lda ticks
-	and #1
+	and #$1
 	 ; end add / sub var with constant
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
 	; BC done
-	bne MainProgram_binaryclausefailed13031
-MainProgram_binaryclausesuccess142
+	bne MainProgram_binaryclausefailed426
+MainProgram_binaryclausesuccess428
 	lda #1; success
-	jmp MainProgram_binaryclausefinished8492
-MainProgram_binaryclausefailed13031
+	jmp MainProgram_binaryclausefinished427
+MainProgram_binaryclausefailed426
 	lda #0 ; failed state
-MainProgram_binaryclausefinished8492
+MainProgram_binaryclausefinished427
 	cmp #1
-	beq MainProgram_ConditionalTrueBlock4745
-	jmp MainProgram_elsedoneblock13186
-MainProgram_ConditionalTrueBlock4745
+	beq MainProgram_ConditionalTrueBlock373
+	jmp MainProgram_elsedoneblock375
+MainProgram_ConditionalTrueBlock373
 	jsr callReadJoy1
 	; Binary clause Simplified: EQUALS
 	lda 197
 	
 	; Compare with pure num / var optimization
 	cmp #$c;keep
-	bne MainProgram_elsedoneblock19187
-MainProgram_ConditionalTrueBlock13064
+	bne MainProgram_elsedoneblock433
+MainProgram_ConditionalTrueBlock431
 	
 ; // force in keyboard
 	; Assigning single variable : joy1
-	lda #2
+	lda #$2
+	; Calling storevariable
 	sta joy1
-MainProgram_elseblock7900
-MainProgram_elsedoneblock19187
+MainProgram_elseblock432
+MainProgram_elsedoneblock433
 	; Binary clause Simplified: EQUALS
 	lda 197
 	
 	; Compare with pure num / var optimization
 	cmp #$2c;keep
-	bne MainProgram_elsedoneblock235
-MainProgram_ConditionalTrueBlock14270
+	bne MainProgram_elsedoneblock439
+MainProgram_ConditionalTrueBlock437
 	; Assigning single variable : joy1
-	lda #4
+	lda #$4
+	; Calling storevariable
 	sta joy1
-MainProgram_elseblock29170
-MainProgram_elsedoneblock235
+MainProgram_elseblock438
+MainProgram_elsedoneblock439
 	; Binary clause Simplified: EQUALS
 	lda 197
 	
 	; Compare with pure num / var optimization
 	cmp #$14;keep
-	bne MainProgram_elsedoneblock7285
-MainProgram_ConditionalTrueBlock18896
+	bne MainProgram_elsedoneblock445
+MainProgram_ConditionalTrueBlock443
 	; Assigning single variable : joy1
-	lda #8
+	lda #$8
+	; Calling storevariable
 	sta joy1
-MainProgram_elseblock4667
-MainProgram_elsedoneblock7285
+MainProgram_elseblock444
+MainProgram_elsedoneblock445
 	; Binary clause Simplified: EQUALS
 	lda 197
 	
 	; Compare with pure num / var optimization
 	cmp #$15;keep
-	bne MainProgram_elsedoneblock28019
-MainProgram_ConditionalTrueBlock2695
+	bne MainProgram_elsedoneblock451
+MainProgram_ConditionalTrueBlock449
 	; Assigning single variable : joy1
-	lda #1
+	lda #$1
+	; Calling storevariable
 	sta joy1
-MainProgram_elseblock21624
-MainProgram_elsedoneblock28019
+MainProgram_elseblock450
+MainProgram_elsedoneblock451
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
 	lda joy1
-	and #2
+	and #$2
 	 ; end add / sub var with constant
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock17371
-MainProgram_ConditionalTrueBlock22658
+	beq MainProgram_elsedoneblock457
+MainProgram_ConditionalTrueBlock455
 	; Assigning single variable : py
 	; Optimizer: a = a +/- b
 	lda py
 	sec
-	sbc #2
+	sbc #$2
 	sta py
 	; Assigning single variable : pd
 	; 8 bit binop
 	; Add/sub where right value is constant number
 	; 8 bit binop
 	; Add/sub where right value is constant number
-	and #4
+	and #$4
 	 ; end add / sub var with constant
 	
 	lsr
 	
 	clc
-	adc #4
+	adc #$4
 	 ; end add / sub var with constant
 	
+	; Calling storevariable
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock26302
-MainProgram_elsedoneblock17371
+MainProgram_elseblock456
+MainProgram_elsedoneblock457
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
 	lda joy1
-	and #4
+	and #$4
 	 ; end add / sub var with constant
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock1018
-MainProgram_ConditionalTrueBlock23851
+	beq MainProgram_elsedoneblock463
+MainProgram_ConditionalTrueBlock461
 	; Assigning single variable : py
 	; Optimizer: a = a +/- b
 	lda py
 	clc
-	adc #2
+	adc #$2
 	sta py
 	; Assigning single variable : pd
 	; 8 bit binop
 	; Add/sub where right value is constant number
 	; 8 bit binop
 	; Add/sub where right value is constant number
-	and #4
+	and #$4
 	 ; end add / sub var with constant
 	
 	lsr
 	
 	clc
-	adc #4
+	adc #$4
 	 ; end add / sub var with constant
 	
+	; Calling storevariable
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock25484
-MainProgram_elsedoneblock1018
+MainProgram_elseblock462
+MainProgram_elsedoneblock463
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
 	lda joy1
-	and #8
+	and #$8
 	 ; end add / sub var with constant
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock31060
-MainProgram_ConditionalTrueBlock2800
+	beq MainProgram_elsedoneblock469
+MainProgram_ConditionalTrueBlock467
 	; Assigning single variable : px
 	; Optimizer: a = a +/- b
 	lda px
 	sec
-	sbc #2
+	sbc #$2
 	sta px
 	; Assigning single variable : pd
-	lda #2
+	lda #$2
+	; Calling storevariable
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock18087
-MainProgram_elsedoneblock31060
+MainProgram_elseblock468
+MainProgram_elsedoneblock469
 	; Binary clause Simplified: NOTEQUALS
 	; 8 bit binop
 	; Add/sub where right value is constant number
 	lda joy1
-	and #1
+	and #$1
 	 ; end add / sub var with constant
 	
 	; Compare with pure num / var optimization
 	cmp #$0;keep
-	beq MainProgram_elsedoneblock9576
-MainProgram_ConditionalTrueBlock32170
+	beq MainProgram_elsedoneblock475
+MainProgram_ConditionalTrueBlock473
 	; Assigning single variable : px
 	; Optimizer: a = a +/- b
 	lda px
 	clc
-	adc #2
+	adc #$2
 	sta px
 	; Assigning single variable : pd
-	lda #0
+	lda #$0
+	; Calling storevariable
 	sta pd
 	jsr Player_SetAnimation
-MainProgram_elseblock20315
-MainProgram_elsedoneblock9576
+MainProgram_elseblock474
+MainProgram_elsedoneblock475
 	; Assigning single variable : cm
 	
 	; ----------
@@ -1622,60 +1515,62 @@ MainProgram_elsedoneblock9576
 	lsr
 	clc
 	adc $80
-	bcc MainProgram_dtnooverflow22758
+	bcc MainProgram_dtnooverflow478
 	iny  ; overflow into high byte
-MainProgram_dtnooverflow22758
+MainProgram_dtnooverflow478
 	
 	sta cm
 	sty cm+1
 	; Assigning single variable : cm
 	; Store Variable simplified optimization : right-hand term is pure
-	ldy #0 ; optimized, look out for bugs
-	lda #1
+	ldy #$0 ; optimized, look out for bugs
+	lda #$1
 	sta (cm),y
-MainProgram_elseblock20649
-MainProgram_elsedoneblock13186
-	jmp MainProgram_while29657
-MainProgram_elseblock6191
-MainProgram_elsedoneblock19815
+MainProgram_elseblock374
+MainProgram_elsedoneblock375
+	jmp MainProgram_while244
+MainProgram_elseblock246
+MainProgram_elsedoneblock247
 EndSymbol
-EndBlock175
+	; End of program
+	; Ending memory block
+EndBlock56
 	org $3a00
 sprRight
-	incbin "C:/src/EnchantedForest///spr/sprRight.bin"
+	incbin "C:/Source/EnchantedForest///spr/sprRight.bin"
 	org $3a40
 sprLeft
-	incbin "C:/src/EnchantedForest///spr/sprLeft.bin"
+	incbin "C:/Source/EnchantedForest///spr/sprLeft.bin"
 	org $3a80
 sprVert1
-	incbin "C:/src/EnchantedForest///spr/sprVert1.bin"
+	incbin "C:/Source/EnchantedForest///spr/sprVert1.bin"
 	org $3ac0
 sprVert2
-	incbin "C:/src/EnchantedForest///spr/sprVert2.bin"
+	incbin "C:/Source/EnchantedForest///spr/sprVert2.bin"
 	org $3b00
 chrTiles
-	incbin "C:/src/EnchantedForest///chr/tiles.bin"
+	incbin "C:/Source/EnchantedForest///chr/tiles.bin"
 	org $3b48
 chrTitle1
-	incbin "C:/src/EnchantedForest///chr/titles-1.bin"
+	incbin "C:/Source/EnchantedForest///chr/titles-1.bin"
 	org $3c10
 chrTitle2
-	incbin "C:/src/EnchantedForest///chr/titles-2.bin"
+	incbin "C:/Source/EnchantedForest///chr/titles-2.bin"
 	org $3cb0
 chrTitle3
-	incbin "C:/src/EnchantedForest///chr/titles-3.bin"
+	incbin "C:/Source/EnchantedForest///chr/titles-3.bin"
 	org $3ce0
 chrTitle4
-	incbin "C:/src/EnchantedForest///chr/titles-4.bin"
+	incbin "C:/Source/EnchantedForest///chr/titles-4.bin"
 	org $3d20
 chrTitle5
-	incbin "C:/src/EnchantedForest///chr/titles-5.bin"
+	incbin "C:/Source/EnchantedForest///chr/titles-5.bin"
 	org $3d68
 chrTitle6
-	incbin "C:/src/EnchantedForest///chr/titles-6.bin"
+	incbin "C:/Source/EnchantedForest///chr/titles-6.bin"
 	org $3e08
 chrTitle7
-	incbin "C:/src/EnchantedForest///chr/titles-7.bin"
+	incbin "C:/Source/EnchantedForest///chr/titles-7.bin"
 	org $3e68
 chrTitle8
-	incbin "C:/src/EnchantedForest///chr/titles-8.bin"
+	incbin "C:/Source/EnchantedForest///chr/titles-8.bin"

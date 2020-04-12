@@ -19,6 +19,15 @@ var
 
 @define DEBUG		1
 
+@donotremove sprRight_A
+@donotremove sprRight_B
+@donotremove sprLeft_A
+@donotremove sprLeft_B
+@donotremove sprVert1_A
+@donotremove sprVert1_B
+@donotremove sprVert2_A
+@donotremove sprVert2_B
+
 
 // -------------------------------------------------------------------------------
 
